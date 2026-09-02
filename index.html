@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General MacArthur, Eastern Samar - Heritage Information System</title>
+  
+  <!-- Tailwind CSS CDN with Class Strategy for Dark Mode -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    /* Liquid Layout Fluid Typography */
+    :root {
+      --fluid-title: clamp(1.875rem, 4vw + 1rem, 3.25rem);
+      --fluid-sub: clamp(0.875rem, 1.2vw + 0.5rem, 1.125rem);
+    }
+    .fluid-title { font-size: var(--fluid-title); line-height: 1.1; }
+    .fluid-sub { font-size: var(--fluid-sub); }
+
+    /* Custom Ambient Liquid Animations */
+    @keyframes blob {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.08); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+    .animate-blob {
+      animation: blob 10s infinite ease-in-out;
+    }
+    .animation-delay-2000 { animation-delay: 2s; }
+
+    /* Theme-Aware Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #059669; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #047857; }
+  </style>
+
+  <!-- Inline Theme Initialization Script -->
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-amber-400 selection:text-emerald-950 transition-colors duration-300">
+
+  <!-- Background Liquid Glow Shapes -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/10 dark:bg-emerald-600/20 rounded-full blur-3xl animate-blob"></div>
+    <div class="absolute top-1/2 -right-40 w-96 h-96 bg-amber-500/10 dark:bg-amber-500/15 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+    <div class="w-full max-w-[95%] xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+      <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchTab('public-view')">
+        <!-- Official Seal of Gen. MacArthur, Eastern Samar -->
+        <img src="IMG_Logo.png" alt="Official Seal of Gen. MacArthur" class="w-12 h-12 rounded-full object-contain shadow-md border border-amber-400 group-hover:scale-105 transition-transform">
+        <div>
+          <h1 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">Gen. MacArthur</h1>
+          <p class="text-[10px] sm:text-xs text-emerald-700 dark:text-emerald-400 font-semibold tracking-wider uppercase">Eastern Samar Heritage System</p>
+        </div>
+      </div>
+
+      <!-- Controls: Navigation & Theme Toggle -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <!-- Fluid Tab & Action Buttons -->
+        <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-200/80 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-300/50 dark:border-slate-700/50 transition-colors">
+          <button id="nav-public" onclick="switchTab('public-view')" class="px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all bg-amber-500 text-slate-950 shadow-md flex items-center space-x-1.5">
+            <i data-lucide="compass" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Public View</span>
+          </button>
+          <button onclick="openHistoryModal()" class="px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 flex items-center space-x-1.5">
+            <i data-lucide="book-open" class="w-4 h-4 text-amber-500"></i>
+            <span class="hidden md:inline">Historical Account</span>
+          </button>
+          <button id="nav-admin" onclick="switchTab('admin-view')" class="px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Admin Portal</span>
+          </button>
+        </nav>
+
+        <!-- Light/Dark Mode Toggle Button -->
+        <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300/50 dark:border-slate-700/50 text-slate-700 dark:text-amber-400 hover:scale-105 transition-all" title="Toggle Light/Dark Theme">
+          <i id="theme-icon-sun" data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+          <i id="theme-icon-moon" data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-grow w-full max-w-[95%] xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 z-10">
+
+    <!-- ================= PUBLIC PORTAL ================= -->
+    <section id="public-view" class="space-y-10">
+      
+      <!-- Dynamic Hero Section (Featured Latest Heritage Record & Historical Button) -->
+      <div id="hero-featured-card" class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-800/50 backdrop-blur-xl p-8 sm:p-12 lg:p-16 shadow-xl dark:shadow-2xl flex flex-col lg:flex-row items-center gap-8 transition-colors duration-300">
+        <!-- Hero content dynamically rendered via JS -->
+      </div>
+
+      <!-- Control Bar (Search & Filter) -->
+      <div class="flex flex-col md:flex-row gap-4 justify-between items-center bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 backdrop-blur-md p-4 rounded-2xl shadow-md transition-colors duration-300">
+        <!-- Search Field -->
+        <div class="relative w-full md:w-96">
+          <i data-lucide="search" class="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          <input type="text" id="public-search" oninput="fetchPublicItems()" placeholder="Search landmarks, barangays, or crops..." class="w-full pl-11 pr-4 py-2.5 bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-all">
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="flex items-center space-x-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+          <button onclick="filterCategory('All')" class="filter-btn active-filter px-5 py-2.5 text-xs font-bold uppercase rounded-xl bg-amber-500 text-slate-950 shadow-md transition-all whitespace-nowrap">All Records</button>
+          <button onclick="filterCategory('Historical')" class="filter-btn px-5 py-2.5 text-xs font-bold uppercase rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 border border-slate-300/50 dark:border-slate-700 transition-all whitespace-nowrap">Historical Landmarks</button>
+          <button onclick="filterCategory('Agricultural')" class="filter-btn px-5 py-2.5 text-xs font-bold uppercase rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 border border-slate-300/50 dark:border-slate-700 transition-all whitespace-nowrap">Agricultural Heritage</button>
+        </div>
+      </div>
+
+      <!-- Fluid Cards Grid -->
+      <div id="public-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamically populated via JS -->
+      </div>
+    </section>
+
+    <!-- ================= ADMIN PORTAL ================= -->
+    <section id="admin-view" class="hidden space-y-8">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md transition-colors duration-300">
+        <div class="flex items-center space-x-4">
+          <img src="IMG_Logo.png" alt="Official Seal" class="w-12 h-12 rounded-full object-contain border border-amber-400">
+          <div>
+            <div class="flex items-center space-x-2">
+              <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Back-End Admin Portal</h2>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">Authenticated</span>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mt-0.5">Manage database records for General MacArthur's historical and agricultural catalog.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center space-x-3 w-full sm:w-auto">
+          <button onclick="openFormModal()" class="flex-1 sm:flex-initial px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center space-x-2">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span>Add New Record</span>
+          </button>
+          <button onclick="logoutAdmin()" class="px-4 py-2.5 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 dark:hover:text-white font-semibold rounded-xl transition-all flex items-center space-x-1.5" title="Logout Admin">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span class="hidden md:inline">Logout</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Data Table -->
+      <div class="bg-white/70 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-lg overflow-hidden backdrop-blur-md transition-colors duration-300">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 uppercase text-[11px] font-bold tracking-wider">
+                <th class="py-4 px-6">Entry Preview</th>
+                <th class="py-4 px-6">Category</th>
+                <th class="py-4 px-6">Barangay / Location</th>
+                <th class="py-4 px-6 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body" class="divide-y divide-slate-200 dark:divide-slate-800 text-sm text-slate-700 dark:text-slate-300">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- HISTORICAL BACKGROUND FULL LONG NARRATIVE MODAL -->
+  <div id="history-modal" class="fixed inset-0 bg-slate-950/80 dark:bg-slate-950/90 backdrop-blur-md hidden items-center justify-center z-50 p-2 sm:p-6 transition-all" onclick="closeHistoryModal()">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-5xl w-full p-6 sm:p-10 shadow-2xl relative max-h-[92vh] flex flex-col my-auto" onclick="event.stopPropagation()">
+      
+      <!-- Close Button -->
+      <button onclick="closeHistoryModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 dark:hover:text-white p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition z-20">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="flex items-center space-x-4 mb-4 pb-4 border-b border-slate-200 dark:border-slate-800 flex-shrink-0">
+        <img src="IMG_Logo.png" alt="Official Seal" class="w-16 h-16 rounded-full object-contain border-2 border-amber-400 shadow-md">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-500">Official Comprehensive Narrative</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Abridged Historical Account of General MacArthur</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">From Pre-Hispanic Pamboan to Present-day Township (Eastern Samar)</p>
+        </div>
+      </div>
+
+      <!-- Scrollable Long Text Narrative -->
+      <div class="overflow-y-auto pr-2 sm:pr-4 space-y-8 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+        
+        <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-xl">
+          <p class="text-xs sm:text-sm text-amber-900 dark:text-amber-200 font-medium italic">
+            "No documents, no history." — Charles Seignobos. This comprehensive narrative bridges oral tradition with verifiable archival records to document the complete historical trajectory of the Municipality of General MacArthur, Eastern Samar[cite: 1].
+          </p>
+        </div>
+
+        <!-- Archival Photo Gallery Grid Inside Narrative -->
+        <div class="my-6">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-500 mb-3 flex items-center gap-1.5">
+            <i data-lucide="image" class="w-4 h-4"></i> Archival Photographs (Early Civic Buildings & Schools)
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165507.jpg', 'Gabaldon School & Early Civic Building Assembly')">
+              <img src="IMG_20260817_165507.jpg" alt="Historical Building Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300">
+              <span class="text-[11px] text-slate-400 mt-2 block font-medium">Early Municipal & Civic Gathering</span>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165453.jpg', 'GMCES School Grounds & Civic Celebration')">
+              <img src="IMG_20260817_165453.jpg" alt="School Grounds Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300">
+              <span class="text-[11px] text-slate-400 mt-2 block font-medium">Civic Grounds & Community Life</span>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165435.jpg', 'Historical Town Gathering at Gabaldon Structure')">
+              <img src="IMG_20260817_165435.jpg" alt="Gabaldon Building Historical Photo" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300">
+              <span class="text-[11px] text-slate-400 mt-2 block font-medium">Gabaldon Educational Assembly</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 1 -->
+        <section class="space-y-3">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+            <i data-lucide="book-open-check" class="w-5 h-5 text-amber-500"></i>
+            Reframing the Past: Between Oral Tradition and Documented History
+          </h3>
+          <p>
+            For the longest time, the history of the Municipality of General MacArthur has been shaped by oral tradition stories passed down through generations, rich in meaning yet often unverified[cite: 1]. Today, however, through careful research and the examination of documentary evidence, the historical past of Pamboan — the earliest known name of the settlement — has been brought to light with greater clarity[cite: 1].
+          </p>
+          <p>
+            This does not seek to discredit oral tradition, but rather to meet it halfway[cite: 1]. Both oral accounts and documented sources contribute to a fuller understanding of the past[cite: 1]. Yet, as emphasized by French historian Charles Seignobos, "No documents, no history."[cite: 1] Thus, historical reconstruction must ultimately be grounded in verifiable evidence[cite: 1].
+          </p>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section class="space-y-3">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+            <i data-lucide="trees" class="w-5 h-5 text-amber-500"></i>
+            From Oral Tradition to Written Records
+          </h3>
+          <p>
+            In the oral traditions of the people of what is now the northern part of Eastern Visayas, the early settlement associated with Pamboan is remembered not only as a place of habitation, but as a landscape shaped by both forest and sea where livelihood, environment, and language intertwined in naming[cite: 1].
+          </p>
+          <p>
+            One strand of local memory holds that the area was once called <strong>"Tugas,"</strong> a term referring to a strong and durable hardwood tree that once thrived in abundance in the locality[cite: 1]. In this telling, the name reflects a landscape thick with forest resources[cite: 1]. Another oral tradition shifts the focus from the forest to the sea[cite: 1]. In this version, the settlement was known as <strong>"Pamubuhan,"</strong> derived from local linguistic roots associated with catching fish and gathering marine products[cite: 1].
+          </p>
+          <p>
+            Over time, linguistic transformation and colonial-era transcription are said to have gradually altered "Pamubuhan" into "Pambujan," the name that later appears in Spanish colonial records[cite: 1]. In the 1610 chronicle of Pedro Chirino, the name Pamboan is associated with the presence of wild boars in the area[cite: 1]. Linguistically, Pambujan emerged from a landscape defined by an opening waterway where land meets sea[cite: 1].
+          </p>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section class="space-y-3">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+            <i data-lucide="anchor" class="w-5 h-5 text-amber-500"></i>
+            Pre-Hispanic Interlude & Early Contacts (1512–1768)
+          </h3>
+          <p>
+            In the deeper currents of pre-Hispanic Eastern Visayas, Pamboan emerged as part of a wider maritime world active by the 13th century[cite: 1]. Pamboan participated as a riverine or shoreline settlement oriented toward the sea, exchanging goods in the Austronesian trading sphere noted in accounts like Chau Ju-Kua's <em>Chu fan-chi</em> (circa 1225)[cite: 1].
+          </p>
+          <p>
+            During the historic voyage of the Magellan-Elcano expedition in 1521, while navigating toward Homonhon Island on March 16, 1521, the expedition reportedly sighted land in the vicinity at approximately 11° north latitude[cite: 1]. Later contacts occurred in 1565 with Miguel López de Legazpi[cite: 1].
+          </p>
+          <p>
+            The arrival of Jesuit missionaries around 1595 marked a new chapter, establishing Pamboan as a <em>visita</em> under larger parishes[cite: 1]. Archival records from 1612–1613 in Archivo General de Indias recorded 200 tributes for Pamboan[cite: 1]. The mission faced difficulties and was abandoned around 1660, leading to a period of historical silence until 1768[cite: 1].
+          </p>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section class="space-y-3">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+            <i data-lucide="shield-alert" class="w-5 h-5 text-amber-500"></i>
+            18th Century Mobility, Trade, and Autonomous Pueblo Formation (1768–1864)
+          </h3>
+          <p>
+            In 1768, following the expulsion of the Jesuits, the Order of Saint Augustine assumed ecclesiastical management, integrating Pamboan into networks with Guiuan, Balangiga, and Quinapondan[cite: 1]. Communities adapted to persistent Moro raids through strategic coastal-inland mobility, defense structures like the <strong>Cota de Pambujan</strong> (1754/1897), and local trading traditions like the Sunday <em>Tabo</em>[cite: 1].
+          </p>
+          <p>
+            A key transformation occurred on January 4, 1864, when a Royal Decree issued under Governor-General Rafael de Echagüe formally constituted an independent pueblo and parish by uniting two co-equal founding <em>visitas</em>: <strong>Nag-as</strong> and <strong>Pambujan</strong>[cite: 1].
+          </p>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section class="space-y-3">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+            <i data-lucide="landmark" class="w-5 h-5 text-amber-500"></i>
+            American Colonial Period & Administrative Transitions (1902–1947)
+          </h3>
+          <p>
+            Under American rule, Act No. 960 on October 23, 1902 consolidated Pambujan, Nag-as, and Lanang[cite: 1]. Educational expansion saw the establishment of the <strong>Escuela de Primera Enseñanza</strong> in 1869 evolving into modern public instruction through the Gabaldon Law (Act No. 1801) in 1907, erecting the historic Gabaldon buildings at General MacArthur Central Elementary School[cite: 1].
+          </p>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section class="space-y-3">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+            <i data-lucide="award" class="w-5 h-5 text-amber-500"></i>
+            Birth of General MacArthur (RA 193 - June 22, 1947)
+          </h3>
+          <p>
+            On <strong>June 22, 1947</strong>, Republic Act No. 193 created the independent municipality of <strong>General MacArthur</strong> composed of barrios Pambujan Sur, Calutan, San Isidro, Vigan, Pingan, Binalay, Camcueves, and Domrog[cite: 1]. The town was named in honor of General Douglas MacArthur[cite: 1]. Subsequent growth included the establishment of the Parish of Saint Joseph (1948) and integration into Eastern Samar province in 1965 (RA 4221)[cite: 1].
+          </p>
+        </section>
+
+      </div>
+
+      <!-- Footer Action -->
+      <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end flex-shrink-0">
+        <button onclick="closeHistoryModal()" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-md transition">Close Account</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ADMIN LOGIN MODAL -->
+  <div id="login-modal" class="fixed inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-md hidden items-center justify-center z-50 p-4 transition-all">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative transition-colors duration-300">
+      <button onclick="closeLoginModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 dark:hover:text-white p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <img src="IMG_Logo.png" alt="Official Seal" class="w-16 h-16 rounded-full object-contain mx-auto mb-3 border-2 border-amber-400 shadow-md">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Admin Authentication</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Enter your admin credentials to access management controls.</p>
+      </div>
+
+      <div id="login-error" class="hidden mb-4 p-3 bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs rounded-xl flex items-center space-x-2">
+        <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
+        <span>Invalid login name or password. Please try again.</span>
+      </div>
+
+      <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1.5">Login Name</label>
+          <input type="text" id="login-username" required class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:outline-none" placeholder="Enter username">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1.5">Password</label>
+          <input type="password" id="login-password" required class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:outline-none" placeholder="Enter password">
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl text-sm font-bold shadow-lg shadow-amber-500/20 transition">Login to Portal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Component: Add / Edit Record -->
+  <div id="item-modal" class="fixed inset-0 bg-slate-950/60 dark:bg-slate-950/80 backdrop-blur-md hidden items-center justify-center z-50 p-4 transition-all">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto transition-colors duration-300">
+      <button onclick="closeFormModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 dark:hover:text-white p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <h3 id="modal-title" class="text-xl font-bold text-slate-900 dark:text-white mb-6">Add Heritage Record</h3>
+
+      <form id="heritage-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <input type="hidden" id="item-id">
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1.5">Record Title</label>
+          <input type="text" id="item-title" required class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:outline-none" placeholder="e.g. WWII Memorial Plaza or Copra Drying Farm">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1.5">Category</label>
+            <select id="item-category" class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:outline-none">
+              <option value="Historical">Historical Landmark</option>
+              <option value="Agricultural">Agricultural Heritage</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1.5">Barangay / Location</label>
+            <input type="text" id="item-location" required class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:outline-none" placeholder="e.g. Poblacion 1, Gen. MacArthur">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1.5">Image Links / Google Drive Links (3 to 5 images, one per line)</label>
+          <textarea id="item-images" rows="4" required class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:outline-none" placeholder="Paste image URLs or Google Drive sharing links (one per line):&#10;https://drive.google.com/file/d/1ABCxyz.../view?usp=sharing&#10;https://images.unsplash.com/..."></textarea>
+          <p class="text-[11px] text-amber-600 dark:text-amber-400 mt-1 font-medium flex items-center gap-1">
+            <i data-lucide="info" class="w-3.5 h-3.5 inline"></i> Google Drive links are automatically converted into direct web images. Make sure Drive permissions are set to "Anyone with the link".
+          </p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1.5">Description</label>
+          <textarea id="item-description" rows="4" required class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:outline-none" placeholder="Provide background history or agricultural significance..."></textarea>
+        </div>
+
+        <div class="flex justify-end space-x-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+          <button type="button" onclick="closeFormModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Cancel</button>
+          <button type="submit" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl text-sm font-bold shadow-lg shadow-amber-500/20 transition">Save Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR FULL-SCREEN IMAGE PREVIEW -->
+  <div id="lightbox-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-lg hidden items-center justify-center z-50 p-4 transition-all" onclick="closeLightbox()">
+    <div class="relative max-w-5xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white/80 hover:text-white p-2 rounded-xl hover:bg-white/10 transition">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <img id="lightbox-img" src="" class="max-h-[80vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl border border-white/10">
+      <p id="lightbox-caption" class="text-sm font-semibold text-white/90 mt-4 text-center"></p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800/80 py-8 mt-auto z-10 transition-colors duration-300">
+    <div class="w-full max-w-[95%] xl:max-w-7xl mx-auto px-4 text-center space-y-2">
+      <div class="flex justify-center items-center space-x-2 mb-2">
+        <img src="IMG_Logo.png" alt="Official Seal" class="w-8 h-8 rounded-full object-contain">
+        <span class="text-xs font-bold uppercase text-slate-700 dark:text-slate-300">Municipality of General MacArthur</span>
+      </div>
+      <p class="text-sm text-slate-600 dark:text-slate-400">&copy; 2026 Local Government Unit of General MacArthur, Eastern Samar.</p>
+      <p class="text-xs text-slate-500 dark:text-slate-600">Web-Based Information System for Historical Landmarks and Agricultural Heritage.</p>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    // Theme Toggle Functionality
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      }
+    }
+
+    // Modal Control for Historical Background Narrative
+    function openHistoryModal() {
+      document.getElementById('history-modal').classList.remove('hidden');
+      document.getElementById('history-modal').classList.add('flex');
+    }
+
+    function closeHistoryModal() {
+      document.getElementById('history-modal').classList.add('hidden');
+      document.getElementById('history-modal').classList.remove('flex');
+    }
+
+    // AUTOMATIC GOOGLE DRIVE DIRECT IMAGE CONVERTER
+    function convertGoogleDriveUrl(url) {
+      if (!url) return url;
+      if (url.includes('drive.google.com') || url.includes('docs.google.com')) {
+        let fileId = '';
+        const matchD = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        const matchId = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+
+        if (matchD && matchD[1]) fileId = matchD[1];
+        else if (matchId && matchId[1]) fileId = matchId[1];
+
+        if (fileId) return `https://lh3.googleusercontent.com/d/${fileId}`;
+      }
+      return url;
+    }
+
+    // Configured Supabase Client Setup
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    
+    let _supabase = null;
+    if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+      _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
+    // Authentication State
+    let isAdminAuthenticated = false;
+
+    // Track Image Carousel State per Card ID
+    const cardCarouselIndices = {};
+
+    // Default Multi-Image Sample Data
+    let heritageData = [
+      {
+        id: "1",
+        title: "Gen. Douglas MacArthur WWII Memorial",
+        category: "Historical",
+        location: "Poblacion, Gen. MacArthur",
+        images: [
+          "https://upload.wikimedia.org/wikipedia/en/d/d8/MacArthur_Landing_Memorial_sculputres.jpg",
+          "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQAIF22TO6pD1B1OqO8hKjVscYXJvLe37oPw6QqGlb23HiBNshoU36t3f-jKdg1SfRyq5fN49vWHB4hKno",
+          "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQbnAH0vHl0RtW8mnHEsjGaiSra59D3JwMIfX6edgqJ2zsve578nNmLXrz1kEXC_jVdPCurk6jy-AIX0"
+        ],
+        description: "Monuments built to commemorate General Douglas MacArthur and the Allied forces during the liberation of Samar during World War II."
+      },
+      {
+        id: "2",
+        title: "Copra & Coconut Plantations",
+        category: "Agricultural",
+        location: "Barangay San Jose",
+        images: [
+          "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcRnGVIbaz0wb3L9T-ICiVOzuHeP4UF1K42QlTbpeXpqK5RPawBCYZtbdHYaE9uAPOaA5JxQDh0vTqOdW2k",
+          "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQnNig-B_h7i1IhWsgq21EIbcAN_bvA2O2O-10hY5y0wnnQRyUM9MHzRpv6vvlKLqLr_AgLrLZ3yg7nkN0",
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80"
+        ],
+        description: "Expansive coconut farming processing sites producing copra, serving as the central economic driver for farming households in General MacArthur."
+      },
+      {
+        id: "3",
+        title: "Lowland Heritage Rice Fields",
+        category: "Agricultural",
+        location: "Barangay Laurel",
+        images: [
+          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQLcx4wNfr59Rcc4XczLobPyQeG2qsqHvE2zNIAGZUvAbTNKVZbGUBB4hwG-IHPl-sdzECCuLFYPlJ1ibk",
+          "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQicZ38VrjtKcbRkvNIo0WQ2sU9KX1HKxX_Xp_jg-UL2N6ougrkES5pIoEM9opI_riDxapwlEZWt4V5I90",
+          "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80"
+        ],
+        description: "Fertile rice paddies in Eastern Samar employing sustainable farming and community irrigation practices."
+      }
+    ];
+
+    let selectedCategory = 'All';
+
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchPublicItems();
+      lucide.createIcons();
+    });
+
+    // View Switching & Authentication Check
+    function switchTab(tabId) {
+      if (tabId === 'admin-view' && !isAdminAuthenticated) {
+        openLoginModal();
+        return;
+      }
+
+      document.getElementById('public-view').classList.toggle('hidden', tabId !== 'public-view');
+      document.getElementById('admin-view').classList.toggle('hidden', tabId !== 'admin-view');
+
+      const pubBtn = document.getElementById('nav-public');
+      const admBtn = document.getElementById('nav-admin');
+
+      if (tabId === 'public-view') {
+        pubBtn.className = "px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all bg-amber-500 text-slate-950 shadow-md flex items-center space-x-1.5";
+        admBtn.className = "px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1.5";
+        fetchPublicItems();
+      } else {
+        admBtn.className = "px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all bg-amber-500 text-slate-950 shadow-md flex items-center space-x-1.5";
+        pubBtn.className = "px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1.5";
+        fetchAdminItems();
+      }
+    }
+
+    // Authentication Logic
+    function openLoginModal() {
+      document.getElementById('login-error').classList.add('hidden');
+      document.getElementById('login-username').value = '';
+      document.getElementById('login-password').value = '';
+      document.getElementById('login-modal').classList.remove('hidden');
+      document.getElementById('login-modal').classList.add('flex');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('login-modal').classList.add('hidden');
+      document.getElementById('login-modal').classList.remove('flex');
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const user = document.getElementById('login-username').value.trim();
+      const pass = document.getElementById('login-password').value.trim();
+
+      if (user === 'genmac' && pass === 'genmac') {
+        isAdminAuthenticated = true;
+        closeLoginModal();
+        switchTab('admin-view');
+      } else {
+        document.getElementById('login-error').classList.remove('hidden');
+      }
+    }
+
+    function logoutAdmin() {
+      isAdminAuthenticated = false;
+      switchTab('public-view');
+    }
+
+    // Category Filtering
+    function filterCategory(cat) {
+      selectedCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-amber-500', 'text-slate-950');
+        btn.classList.add('bg-slate-200', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+        if (btn.innerText.includes(cat) || (cat === 'All' && btn.innerText.includes('All'))) {
+          btn.classList.remove('bg-slate-200', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+          btn.classList.add('bg-amber-500', 'text-slate-950');
+        }
+      });
+      fetchPublicItems();
+    }
+
+    // Carousel Image Switching per Card
+    function changeCardImage(itemId, newIndex, event) {
+      if (event) event.stopPropagation();
+      const item = heritageData.find(i => i.id.toString() === itemId.toString());
+      if (!item) return;
+
+      const total = item.images.length;
+      let targetIndex = (newIndex + total) % total;
+      cardCarouselIndices[itemId] = targetIndex;
+
+      const mainImg = document.getElementById(`card-img-${itemId}`);
+      const counter = document.getElementById(`card-counter-${itemId}`);
+      if (mainImg) mainImg.src = item.images[targetIndex];
+      if (counter) counter.innerText = `${targetIndex + 1}/${total}`;
+
+      item.images.forEach((_, idx) => {
+        const thumb = document.getElementById(`thumb-${itemId}-${idx}`);
+        if (thumb) {
+          if (idx === targetIndex) {
+            thumb.className = "w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-cover border-2 border-amber-400 opacity-100 transition-all cursor-pointer";
+          } else {
+            thumb.className = "w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-cover border border-white/30 opacity-60 hover:opacity-100 transition-all cursor-pointer";
+          }
+        }
+      });
+    }
+
+    // Open Lightbox Preview
+    function openLightbox(imgUrl, caption) {
+      document.getElementById('lightbox-img').src = imgUrl;
+      document.getElementById('lightbox-caption').innerText = caption;
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+      document.getElementById('lightbox-modal').classList.add('flex');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').classList.add('hidden');
+      document.getElementById('lightbox-modal').classList.remove('flex');
+    }
+
+    // Render Hero Section (Featured Latest Heritage Record & Historical Button)
+    function renderHeroFeatured(latestItem) {
+      const container = document.getElementById('hero-featured-card');
+      if (!latestItem) {
+        container.innerHTML = `<p class="text-slate-400 text-center w-full">No heritage items added yet.</p>`;
+        return;
+      }
+
+      const activeImage = latestItem.images && latestItem.images.length > 0 ? latestItem.images[0] : '';
+
+      container.innerHTML = `
+        <div class="w-full lg:w-3/5 space-y-6 z-10">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-extrabold uppercase tracking-wider">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <span>Latest Heritage Record</span>
+            </span>
+            <span class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-500"></i> ${latestItem.location}
+            </span>
+          </div>
+
+          <h2 class="fluid-title font-extrabold text-slate-900 dark:text-white tracking-tight">
+            ${latestItem.title}
+          </h2>
+
+          <p class="fluid-sub text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+            ${latestItem.description}
+          </p>
+
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <button onclick="openHistoryModal()" class="px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/20 transition flex items-center space-x-2">
+              <i data-lucide="book-open" class="w-4 h-4"></i>
+              <span>Read Historical Account</span>
+            </button>
+            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Gallery Contains ${latestItem.images.length} Photos</span>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-2/5 relative group cursor-pointer" onclick="openLightbox('${activeImage}', '${latestItem.title}')">
+          <div class="absolute -inset-1 bg-gradient-to-r from-amber-500 to-emerald-500 rounded-2xl blur opacity-25 group-hover:opacity-60 transition duration-500"></div>
+          <div class="relative rounded-2xl overflow-hidden aspect-video lg:aspect-square shadow-xl border border-slate-200 dark:border-slate-700/50">
+            <img src="${activeImage}" alt="${latestItem.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent p-6 flex flex-col justify-end">
+              <span class="text-amber-400 font-bold text-xs uppercase tracking-wider">${latestItem.category} Heritage</span>
+              <h3 class="text-white font-bold text-lg leading-snug">${latestItem.title}</h3>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    // Read Data (Public)
+    async function fetchPublicItems() {
+      const search = document.getElementById('public-search').value.toLowerCase();
+      let data = heritageData;
+
+      if (_supabase) {
+        let query = _supabase.from('heritage_items').select('*').order('id', { ascending: false });
+        if (selectedCategory !== 'All') query = query.eq('category', selectedCategory);
+        if (search) query = query.or(`title.ilike.%${search}%,description.ilike.%${search}%,location.ilike.%${search}%`);
+        const res = await query;
+        if (!res.error && res.data) {
+          data = res.data.map(item => ({
+            ...item,
+            images: Array.isArray(item.images) ? item.images.map(convertGoogleDriveUrl) : (typeof item.images === 'string' ? JSON.parse(item.images).map(convertGoogleDriveUrl) : [convertGoogleDriveUrl(item.image || '')])
+          }));
+        }
+      } else {
+        data = heritageData.filter(item => {
+          const matchCategory = selectedCategory === 'All' || item.category === selectedCategory;
+          const matchSearch = item.title.toLowerCase().includes(search) || 
+                              item.location.toLowerCase().includes(search) || 
+                              item.description.toLowerCase().includes(search);
+          return matchCategory && matchSearch;
+        });
+      }
+
+      if (data && data.length > 0) {
+        renderHeroFeatured(data[0]);
+      }
+
+      const container = document.getElementById('public-cards-grid');
+      if (!data || data.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-16 text-slate-400"><i data-lucide="inbox" class="w-12 h-12 mx-auto mb-3 stroke-1"></i><p>No records found matching your search criteria.</p></div>`;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = data.map(item => {
+        const images = item.images && item.images.length > 0 ? item.images : ['https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'];
+        const activeIdx = cardCarouselIndices[item.id] || 0;
+        const currentImg = images[activeIdx] || images[0];
+
+        return `
+          <div class="group bg-white/80 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden backdrop-blur-md shadow-md hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-video overflow-hidden bg-slate-950 group/img">
+                <img id="card-img-${item.id}" src="${currentImg}" alt="${item.title}" onclick="openLightbox(this.src, '${item.title}')" class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
+                
+                <div class="absolute top-3 left-3 z-10">
+                  <span class="text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-md border ${item.category === 'Historical' ? 'bg-amber-500/20 text-amber-800 dark:text-amber-300 border-amber-500/30' : 'bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border-emerald-500/30'}">
+                    ${item.category}
+                  </span>
+                </div>
+
+                ${images.length > 1 ? `
+                  <button onclick="changeCardImage('${item.id}', (cardCarouselIndices['${item.id}'] || 0) - 1, event)" class="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-slate-950/60 text-white opacity-0 group-hover/img:opacity-100 transition-opacity hover:bg-slate-950">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                  </button>
+                  <button onclick="changeCardImage('${item.id}', (cardCarouselIndices['${item.id}'] || 0) + 1, event)" class="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-slate-950/60 text-white opacity-0 group-hover/img:opacity-100 transition-opacity hover:bg-slate-950">
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                  </button>
+                  <div class="absolute top-3 right-3 z-10 px-2 py-0.5 rounded-md bg-slate-950/70 text-[10px] font-bold text-white border border-white/20">
+                    <span id="card-counter-${item.id}">${activeIdx + 1}/${images.length}</span>
+                  </div>
+                ` : ''}
+
+                <div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-1.5 px-2 z-10">
+                  ${images.map((img, idx) => `
+                    <img id="thumb-${item.id}-${idx}" src="${img}" onclick="changeCardImage('${item.id}', ${idx}, event)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-cover ${idx === activeIdx ? 'border-2 border-amber-400 opacity-100' : 'border border-white/30 opacity-60 hover:opacity-100'} transition-all cursor-pointer" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
+                  `).join('')}
+                </div>
+              </div>
+
+              <div class="p-6 space-y-3">
+                <div class="flex items-center text-xs text-slate-500 dark:text-slate-400 space-x-1">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-500"></i>
+                  <span>${item.location}</span>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">${item.title}</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">${item.description}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // Read Data (Admin)
+    async function fetchAdminItems() {
+      if (!isAdminAuthenticated) return;
+      
+      let data = heritageData;
+      if (_supabase) {
+        const res = await _supabase.from('heritage_items').select('*').order('id', { ascending: false });
+        if (!res.error && res.data) {
+          data = res.data.map(item => ({
+            ...item,
+            images: Array.isArray(item.images) ? item.images.map(convertGoogleDriveUrl) : (typeof item.images === 'string' ? JSON.parse(item.images).map(convertGoogleDriveUrl) : [convertGoogleDriveUrl(item.image || '')])
+          }));
+        }
+      }
+
+      const tbody = document.getElementById('admin-table-body');
+      tbody.innerHTML = data.map(item => {
+        const previewImg = item.images && item.images.length > 0 ? item.images[0] : '';
+        return `
+          <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition">
+            <td class="py-4 px-6">
+              <div class="flex items-center space-x-3">
+                <img src="${previewImg}" class="w-12 h-12 rounded-xl object-cover bg-slate-200 dark:bg-slate-950 border border-slate-300 dark:border-slate-700/50" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
+                <div>
+                  <p class="font-bold text-slate-900 dark:text-white">${item.title}</p>
+                  <p class="text-xs text-slate-500 line-clamp-1">${item.description}</p>
+                  <span class="text-[10px] text-amber-500 font-semibold">${item.images.length} Photos</span>
+                </div>
+              </div>
+            </td>
+            <td class="py-4 px-6">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${item.category === 'Historical' ? 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20' : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20'}">
+                ${item.category}
+              </span>
+            </td>
+            <td class="py-4 px-6 text-slate-500 dark:text-slate-400 text-xs">${item.location}</td>
+            <td class="py-4 px-6 text-center">
+              <div class="flex items-center justify-center space-x-2">
+                <button onclick="editItem('${item.id}')" class="p-2 text-blue-600 dark:text-blue-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition" title="Edit"><i data-lucide="pencil" class="w-4 h-4"></i></button>
+                <button onclick="deleteItem('${item.id}')" class="p-2 text-rose-600 dark:text-rose-400 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition" title="Delete"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // Create & Update Handler
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      if (!isAdminAuthenticated) return;
+
+      const id = document.getElementById('item-id').value;
+      const rawImageLines = document.getElementById('item-images').value.trim().split('\n').map(url => url.trim()).filter(url => url.length > 0);
+      const convertedImages = rawImageLines.map(convertGoogleDriveUrl);
+
+      const payload = {
+        title: document.getElementById('item-title').value,
+        category: document.getElementById('item-category').value,
+        location: document.getElementById('item-location').value,
+        images: convertedImages,
+        description: document.getElementById('item-description').value,
+      };
+
+      if (_supabase) {
+        const supabasePayload = { ...payload, images: JSON.stringify(payload.images) };
+        if (id) await _supabase.from('heritage_items').update(supabasePayload).eq('id', id);
+        else await _supabase.from('heritage_items').insert([supabasePayload]);
+      } else {
+        if (id) {
+          const index = heritageData.findIndex(i => i.id === id);
+          if (index !== -1) heritageData[index] = { id, ...payload };
+        } else {
+          heritageData.unshift({ id: Date.now().toString(), ...payload });
+        }
+      }
+
+      closeFormModal();
+      fetchAdminItems();
+      fetchPublicItems();
+    }
+
+    // Edit Item
+    async function editItem(id) {
+      if (!isAdminAuthenticated) return;
+
+      let item = heritageData.find(i => i.id === id);
+      if (_supabase) {
+        const res = await _supabase.from('heritage_items').select('*').eq('id', id).single();
+        if (res.data) {
+          item = {
+            ...res.data,
+            images: Array.isArray(res.data.images) ? res.data.images.map(convertGoogleDriveUrl) : (typeof res.data.images === 'string' ? JSON.parse(res.data.images).map(convertGoogleDriveUrl) : [convertGoogleDriveUrl(res.data.image || '')])
+          };
+        }
+      }
+
+      if (item) {
+        document.getElementById('item-id').value = item.id;
+        document.getElementById('item-title').value = item.title;
+        document.getElementById('item-category').value = item.category;
+        document.getElementById('item-location').value = item.location;
+        document.getElementById('item-images').value = item.images.join('\n');
+        document.getElementById('item-description').value = item.description;
+        openFormModal(true);
+      }
+    }
+
+    // Delete Item
+    async function deleteItem(id) {
+      if (!isAdminAuthenticated) return;
+
+      if (confirm('Are you sure you want to delete this record?')) {
+        if (_supabase) {
+          await _supabase.from('heritage_items').delete().eq('id', id);
+        } else {
+          heritageData = heritageData.filter(i => i.id !== id);
+        }
+        fetchAdminItems();
+        fetchPublicItems();
+      }
+    }
+
+    // Modal Display Functions
+    function openFormModal(isEdit = false) {
+      document.getElementById('modal-title').innerText = isEdit ? "Edit Heritage Record" : "Add Heritage Record";
+      document.getElementById('item-modal').classList.remove('hidden');
+      document.getElementById('item-modal').classList.add('flex');
+    }
+
+    function closeFormModal() {
+      document.getElementById('item-modal').classList.add('hidden');
+      document.getElementById('item-modal').classList.remove('flex');
+      document.getElementById('heritage-form').reset();
+      document.getElementById('item-id').value = '';
+    }
+  </script>
+</body>
+</html>
