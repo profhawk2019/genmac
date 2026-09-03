@@ -126,13 +126,44 @@
           </span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Barangay Histories</h2>
         </div>
-        <p class="text-slate-600 dark:text-slate-400 text-sm max-w-2xl">
+        <p class="text-slate-600 dark:text-slate-400 text-sm max-w-2xl mb-6">
           Explore the historical backgrounds, origins, and heritage records of individual barangays across General MacArthur, Eastern Samar.
         </p>
 
-        <div class="mt-6 relative max-w-md">
-          <i data-lucide="search" class="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-          <input type="text" id="barangay-search" oninput="fetchBarangayItems()" placeholder="Search specific barangay history..." class="w-full pl-11 pr-4 py-2.5 bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-all">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="relative">
+            <i data-lucide="search" class="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="barangay-search" oninput="fetchBarangayItems()" placeholder="Search barangay records..." class="w-full pl-11 pr-4 py-2.5 bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-all">
+          </div>
+
+          <div>
+            <select id="barangay-dropdown-filter" onchange="fetchBarangayItems()" class="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:outline-none transition-all">
+              <option value="All">Filter by Barangay (All Barangays)</option>
+              <option value="Alsatian">Barangay Alsatian</option>
+              <option value="Bago">Barangay Bago</option>
+              <option value="Bual">Barangay Bual</option>
+              <option value="Calaagan">Barangay Calaagan</option>
+              <option value="Camcuevas">Barangay Camcuevas</option>
+              <option value="Kauswagan">Barangay Kauswagan</option>
+              <option value="Mabuhay">Barangay Mabuhay</option>
+              <option value="MacArthur">Barangay MacArthur</option>
+              <option value="Poblacion 1">Barangay Poblacion 1</option>
+              <option value="Poblacion 2">Barangay Poblacion 2</option>
+              <option value="Poblacion 3">Barangay Poblacion 3</option>
+              <option value="Poblacion 4">Barangay Poblacion 4</option>
+              <option value="Poblacion 5">Barangay Poblacion 5</option>
+              <option value="Poblacion 6">Barangay Poblacion 6</option>
+              <option value="Poblacion 7">Barangay Poblacion 7</option>
+              <option value="Poblacion 8">Barangay Poblacion 8</option>
+              <option value="San Antonio">Barangay San Antonio</option>
+              <option value="San Isidro">Barangay San Isidro</option>
+              <option value="San Jose">Barangay San Jose</option>
+              <option value="San Roque">Barangay San Roque</option>
+              <option value="Santa Cruz">Barangay Santa Cruz</option>
+              <option value="Tugop">Barangay Tugop</option>
+              <option value="Villarosa">Barangay Villarosa</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -570,6 +601,7 @@
       const { data, error } = await _supabase
         .from('heritage_records')
         .select('*')
+        .neq('category', 'Barangay History')
         .order('created_at', { ascending: false });
 
       if (error) {
@@ -610,6 +642,7 @@
 
       const searchInput = document.getElementById('barangay-search');
       const search = searchInput ? searchInput.value.toLowerCase() : '';
+      const dropdownFilter = document.getElementById('barangay-dropdown-filter').value;
 
       const { data, error } = await _supabase
         .from('heritage_records')
@@ -625,13 +658,15 @@
 
       const barangayRecords = data || [];
       let filteredData = barangayRecords.filter(item => {
-        return (item.title || '').toLowerCase().includes(search) || 
-               (item.location || '').toLowerCase().includes(search) || 
-               (item.description || '').toLowerCase().includes(search);
+        const matchesDropdown = dropdownFilter === 'All' || (item.location || '').toLowerCase().includes(dropdownFilter.toLowerCase());
+        const matchesSearch = (item.title || '').toLowerCase().includes(search) || 
+                              (item.location || '').toLowerCase().includes(search) || 
+                              (item.description || '').toLowerCase().includes(search);
+        return matchesDropdown && matchesSearch;
       });
 
       if (!filteredData || filteredData.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-16 text-slate-400"><i data-lucide="inbox" class="w-12 h-12 mx-auto mb-3 stroke-1"></i><p>No barangay history records found.</p></div>`;
+        container.innerHTML = `<div class="col-span-full text-center py-16 text-slate-400"><i data-lucide="inbox" class="w-12 h-12 mx-auto mb-3 stroke-1"></i><p>No barangay history records found for the selected criteria.</p></div>`;
         if (window.lucide) lucide.createIcons();
         return;
       }
