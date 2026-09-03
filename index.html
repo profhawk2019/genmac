@@ -19,7 +19,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    /* Liquid Layout Fluid Typography */
     :root {
       --fluid-title: clamp(1.875rem, 4vw + 1rem, 3.25rem);
       --fluid-sub: clamp(0.875rem, 1.2vw + 0.5rem, 1.125rem);
@@ -27,7 +26,6 @@
     .fluid-title { font-size: var(--fluid-title); line-height: 1.1; }
     .fluid-sub { font-size: var(--fluid-sub); }
 
-    /* Custom Ambient Liquid Animations */
     @keyframes blob {
       0%, 100% { transform: translate(0px, 0px) scale(1); }
       33% { transform: translate(30px, -40px) scale(1.08); }
@@ -38,14 +36,12 @@
     }
     .animation-delay-2000 { animation-delay: 2s; }
 
-    /* Theme-Aware Custom Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #059669; border-radius: 9999px; }
     ::-webkit-scrollbar-thumb:hover { background: #047857; }
   </style>
 
-  <!-- Inline Theme Initialization Script -->
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -67,7 +63,7 @@
     <div class="w-full max-w-[95%] xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
       <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchTab('public-view')">
         <!-- Official Seal of Gen. MacArthur, Eastern Samar -->
-        <img src="IMG_Logo.png" alt="Official Seal of Gen. MacArthur" class="w-12 h-12 rounded-full object-contain shadow-md border border-amber-400 group-hover:scale-105 transition-transform">
+        <img src="IMG_Logo.png" alt="Official Seal of Gen. MacArthur" class="w-12 h-12 rounded-full object-contain shadow-md border border-amber-400 group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='./IMG_Logo.png';">
         <div>
           <h1 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">Gen. MacArthur</h1>
           <p class="text-[10px] sm:text-xs text-emerald-700 dark:text-emerald-400 font-semibold tracking-wider uppercase">Eastern Samar Heritage System</p>
@@ -76,7 +72,6 @@
 
       <!-- Controls: Navigation & Theme Toggle -->
       <div class="flex items-center space-x-2 sm:space-x-3">
-        <!-- Fluid Tab & Action Buttons -->
         <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-200/80 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-300/50 dark:border-slate-700/50 transition-colors">
           <button id="nav-public" onclick="switchTab('public-view')" class="px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all bg-amber-500 text-slate-950 shadow-md flex items-center space-x-1.5">
             <i data-lucide="compass" class="w-4 h-4"></i>
@@ -92,7 +87,6 @@
           </button>
         </nav>
 
-        <!-- Light/Dark Mode Toggle Button -->
         <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300/50 dark:border-slate-700/50 text-slate-700 dark:text-amber-400 hover:scale-105 transition-all" title="Toggle Light/Dark Theme">
           <i id="theme-icon-sun" data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
           <i id="theme-icon-moon" data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
@@ -107,20 +101,17 @@
     <!-- ================= PUBLIC PORTAL ================= -->
     <section id="public-view" class="space-y-10">
       
-      <!-- Dynamic Hero Section (Featured Latest Heritage Record & Historical Button) -->
+      <!-- Dynamic Hero Section -->
       <div id="hero-featured-card" class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-800/50 backdrop-blur-xl p-8 sm:p-12 lg:p-16 shadow-xl dark:shadow-2xl flex flex-col lg:flex-row items-center gap-8 transition-colors duration-300">
-        <!-- Hero content dynamically rendered via JS -->
       </div>
 
       <!-- Control Bar (Search & Filter) -->
       <div class="flex flex-col md:flex-row gap-4 justify-between items-center bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 backdrop-blur-md p-4 rounded-2xl shadow-md transition-colors duration-300">
-        <!-- Search Field -->
         <div class="relative w-full md:w-96">
           <i data-lucide="search" class="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
           <input type="text" id="public-search" oninput="fetchPublicItems()" placeholder="Search landmarks, barangays, or crops..." class="w-full pl-11 pr-4 py-2.5 bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-all">
         </div>
 
-        <!-- Filter Controls -->
         <div class="flex items-center space-x-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
           <button onclick="filterCategory('All')" class="filter-btn active-filter px-5 py-2.5 text-xs font-bold uppercase rounded-xl bg-amber-500 text-slate-950 shadow-md transition-all whitespace-nowrap">All Records</button>
           <button onclick="filterCategory('Historical')" class="filter-btn px-5 py-2.5 text-xs font-bold uppercase rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 border border-slate-300/50 dark:border-slate-700 transition-all whitespace-nowrap">Historical Landmarks</button>
@@ -130,7 +121,6 @@
 
       <!-- Fluid Cards Grid -->
       <div id="public-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Dynamically populated via JS -->
       </div>
     </section>
 
@@ -138,7 +128,7 @@
     <section id="admin-view" class="hidden space-y-8">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md transition-colors duration-300">
         <div class="flex items-center space-x-4">
-          <img src="IMG_Logo.png" alt="Official Seal" class="w-12 h-12 rounded-full object-contain border border-amber-400">
+          <img src="IMG_Logo.png" alt="Official Seal" class="w-12 h-12 rounded-full object-contain border border-amber-400" onerror="this.onerror=null; this.src='./IMG_Logo.png';">
           <div>
             <div class="flex items-center space-x-2">
               <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Back-End Admin Portal</h2>
@@ -173,7 +163,6 @@
               </tr>
             </thead>
             <tbody id="admin-table-body" class="divide-y divide-slate-200 dark:divide-slate-800 text-sm text-slate-700 dark:text-slate-300">
-              <!-- Dynamically populated -->
             </tbody>
           </table>
         </div>
@@ -186,14 +175,12 @@
   <div id="history-modal" class="fixed inset-0 bg-slate-950/80 dark:bg-slate-950/90 backdrop-blur-md hidden items-center justify-center z-50 p-2 sm:p-6 transition-all" onclick="closeHistoryModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-5xl w-full p-6 sm:p-10 shadow-2xl relative max-h-[92vh] flex flex-col my-auto" onclick="event.stopPropagation()">
       
-      <!-- Close Button -->
       <button onclick="closeHistoryModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 dark:hover:text-white p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition z-20">
         <i data-lucide="x" class="w-6 h-6"></i>
       </button>
 
-      <!-- Modal Header -->
       <div class="flex items-center space-x-4 mb-4 pb-4 border-b border-slate-200 dark:border-slate-800 flex-shrink-0">
-        <img src="IMG_Logo.png" alt="Official Seal" class="w-16 h-16 rounded-full object-contain border-2 border-amber-400 shadow-md">
+        <img src="IMG_Logo.png" alt="Official Seal" class="w-16 h-16 rounded-full object-contain border-2 border-amber-400 shadow-md" onerror="this.onerror=null; this.src='./IMG_Logo.png';">
         <div>
           <span class="text-xs font-bold uppercase tracking-widest text-amber-500">Official Comprehensive Narrative</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Abridged Historical Account of General MacArthur</h2>
@@ -201,7 +188,6 @@
         </div>
       </div>
 
-      <!-- Scrollable Long Text Narrative -->
       <div class="overflow-y-auto pr-2 sm:pr-4 space-y-8 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
         
         <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-xl">
@@ -210,22 +196,22 @@
           </p>
         </div>
 
-        <!-- Archival Photo Gallery Grid Inside Narrative -->
+        <!-- Archival Photo Gallery Grid -->
         <div class="my-6">
           <h4 class="text-xs font-bold uppercase tracking-wider text-amber-500 mb-3 flex items-center gap-1.5">
             <i data-lucide="image" class="w-4 h-4"></i> Archival Photographs (Early Civic Buildings & Schools)
           </h4>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165507.jpg', 'Gabaldon School & Early Civic Building Assembly')">
-              <img src="IMG_20260817_165507.jpg" alt="Historical Building Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300">
+              <img src="IMG_20260817_165507.jpg" alt="Historical Building Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='./IMG_20260817_165507.jpg';">
               <span class="text-[11px] text-slate-400 mt-2 block font-medium">Early Municipal & Civic Gathering</span>
             </div>
             <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165453.jpg', 'GMCES School Grounds & Civic Celebration')">
-              <img src="IMG_20260817_165453.jpg" alt="School Grounds Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300">
+              <img src="IMG_20260817_165453.jpg" alt="School Grounds Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='./IMG_20260817_165453.jpg';">
               <span class="text-[11px] text-slate-400 mt-2 block font-medium">Civic Grounds & Community Life</span>
             </div>
             <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165435.jpg', 'Historical Town Gathering at Gabaldon Structure')">
-              <img src="IMG_20260817_165435.jpg" alt="Gabaldon Building Historical Photo" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300">
+              <img src="IMG_20260817_165435.jpg" alt="Gabaldon Building Historical Photo" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='./IMG_20260817_165435.jpg';">
               <span class="text-[11px] text-slate-400 mt-2 block font-medium">Gabaldon Educational Assembly</span>
             </div>
           </div>
@@ -317,7 +303,6 @@
 
       </div>
 
-      <!-- Footer Action -->
       <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end flex-shrink-0">
         <button onclick="closeHistoryModal()" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-md transition">Close Account</button>
       </div>
@@ -333,7 +318,7 @@
       </button>
 
       <div class="text-center mb-6">
-        <img src="IMG_Logo.png" alt="Official Seal" class="w-16 h-16 rounded-full object-contain mx-auto mb-3 border-2 border-amber-400 shadow-md">
+        <img src="IMG_Logo.png" alt="Official Seal" class="w-16 h-16 rounded-full object-contain mx-auto mb-3 border-2 border-amber-400 shadow-md" onerror="this.onerror=null; this.src='./IMG_Logo.png';">
         <h3 class="text-xl font-bold text-slate-900 dark:text-white">Admin Authentication</h3>
         <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Enter your admin credentials to access management controls.</p>
       </div>
@@ -419,7 +404,7 @@
       <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white/80 hover:text-white p-2 rounded-xl hover:bg-white/10 transition">
         <i data-lucide="x" class="w-6 h-6"></i>
       </button>
-      <img id="lightbox-img" src="" class="max-h-[80vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl border border-white/10">
+      <img id="lightbox-img" src="" referrerpolicy="no-referrer" class="max-h-[80vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl border border-white/10">
       <p id="lightbox-caption" class="text-sm font-semibold text-white/90 mt-4 text-center"></p>
     </div>
   </div>
@@ -428,7 +413,7 @@
   <footer class="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800/80 py-8 mt-auto z-10 transition-colors duration-300">
     <div class="w-full max-w-[95%] xl:max-w-7xl mx-auto px-4 text-center space-y-2">
       <div class="flex justify-center items-center space-x-2 mb-2">
-        <img src="IMG_Logo.png" alt="Official Seal" class="w-8 h-8 rounded-full object-contain">
+        <img src="IMG_Logo.png" alt="Official Seal" class="w-8 h-8 rounded-full object-contain" onerror="this.onerror=null; this.src='./IMG_Logo.png';">
         <span class="text-xs font-bold uppercase text-slate-700 dark:text-slate-300">Municipality of General MacArthur</span>
       </div>
       <p class="text-sm text-slate-600 dark:text-slate-400">&copy; 2026 Local Government Unit of General MacArthur, Eastern Samar.</p>
@@ -438,7 +423,6 @@
 
   <!-- Application Logic -->
   <script>
-    // Theme Toggle Functionality
     function toggleTheme() {
       if (document.documentElement.classList.contains('dark')) {
         document.documentElement.classList.remove('dark');
@@ -449,7 +433,6 @@
       }
     }
 
-    // Modal Control for Historical Background Narrative
     function openHistoryModal() {
       document.getElementById('history-modal').classList.remove('hidden');
       document.getElementById('history-modal').classList.add('flex');
@@ -460,7 +443,7 @@
       document.getElementById('history-modal').classList.remove('flex');
     }
 
-    // AUTOMATIC GOOGLE DRIVE DIRECT IMAGE CONVERTER
+    // Direct image converter for Google Drive URLs with fallback proxy
     function convertGoogleDriveUrl(url) {
       if (!url) return url;
       if (url.includes('drive.google.com') || url.includes('docs.google.com')) {
@@ -476,7 +459,6 @@
       return url;
     }
 
-    // Configured Supabase Client Setup
     const SUPABASE_URL = 'YOUR_SUPABASE_URL';
     const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
     
@@ -485,13 +467,9 @@
       _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 
-    // Authentication State
     let isAdminAuthenticated = false;
-
-    // Track Image Carousel State per Card ID
     const cardCarouselIndices = {};
 
-    // Default Multi-Image Sample Data
     let heritageData = [
       {
         id: "1",
@@ -500,8 +478,7 @@
         location: "Poblacion, Gen. MacArthur",
         images: [
           "https://upload.wikimedia.org/wikipedia/en/d/d8/MacArthur_Landing_Memorial_sculputres.jpg",
-          "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQAIF22TO6pD1B1OqO8hKjVscYXJvLe37oPw6QqGlb23HiBNshoU36t3f-jKdg1SfRyq5fN49vWHB4hKno",
-          "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQbnAH0vHl0RtW8mnHEsjGaiSra59D3JwMIfX6edgqJ2zsve578nNmLXrz1kEXC_jVdPCurk6jy-AIX0"
+          "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80"
         ],
         description: "Monuments built to commemorate General Douglas MacArthur and the Allied forces during the liberation of Samar during World War II."
       },
@@ -511,9 +488,8 @@
         category: "Agricultural",
         location: "Barangay San Jose",
         images: [
-          "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcRnGVIbaz0wb3L9T-ICiVOzuHeP4UF1K42QlTbpeXpqK5RPawBCYZtbdHYaE9uAPOaA5JxQDh0vTqOdW2k",
-          "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQnNig-B_h7i1IhWsgq21EIbcAN_bvA2O2O-10hY5y0wnnQRyUM9MHzRpv6vvlKLqLr_AgLrLZ3yg7nkN0",
-          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80"
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80"
         ],
         description: "Expansive coconut farming processing sites producing copra, serving as the central economic driver for farming households in General MacArthur."
       },
@@ -523,9 +499,8 @@
         category: "Agricultural",
         location: "Barangay Laurel",
         images: [
-          "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQLcx4wNfr59Rcc4XczLobPyQeG2qsqHvE2zNIAGZUvAbTNKVZbGUBB4hwG-IHPl-sdzECCuLFYPlJ1ibk",
-          "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQicZ38VrjtKcbRkvNIo0WQ2sU9KX1HKxX_Xp_jg-UL2N6ougrkES5pIoEM9opI_riDxapwlEZWt4V5I90",
-          "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80"
+          "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80"
         ],
         description: "Fertile rice paddies in Eastern Samar employing sustainable farming and community irrigation practices."
       }
@@ -538,7 +513,6 @@
       lucide.createIcons();
     });
 
-    // View Switching & Authentication Check
     function switchTab(tabId) {
       if (tabId === 'admin-view' && !isAdminAuthenticated) {
         openLoginModal();
@@ -562,7 +536,6 @@
       }
     }
 
-    // Authentication Logic
     function openLoginModal() {
       document.getElementById('login-error').classList.add('hidden');
       document.getElementById('login-username').value = '';
@@ -595,7 +568,6 @@
       switchTab('public-view');
     }
 
-    // Category Filtering
     function filterCategory(cat) {
       selectedCategory = cat;
       document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -609,7 +581,6 @@
       fetchPublicItems();
     }
 
-    // Carousel Image Switching per Card
     function changeCardImage(itemId, newIndex, event) {
       if (event) event.stopPropagation();
       const item = heritageData.find(i => i.id.toString() === itemId.toString());
@@ -636,7 +607,6 @@
       });
     }
 
-    // Open Lightbox Preview
     function openLightbox(imgUrl, caption) {
       document.getElementById('lightbox-img').src = imgUrl;
       document.getElementById('lightbox-caption').innerText = caption;
@@ -649,7 +619,6 @@
       document.getElementById('lightbox-modal').classList.remove('flex');
     }
 
-    // Render Hero Section (Featured Latest Heritage Record & Historical Button)
     function renderHeroFeatured(latestItem) {
       const container = document.getElementById('hero-featured-card');
       if (!latestItem) {
@@ -691,7 +660,7 @@
         <div class="w-full lg:w-2/5 relative group cursor-pointer" onclick="openLightbox('${activeImage}', '${latestItem.title}')">
           <div class="absolute -inset-1 bg-gradient-to-r from-amber-500 to-emerald-500 rounded-2xl blur opacity-25 group-hover:opacity-60 transition duration-500"></div>
           <div class="relative rounded-2xl overflow-hidden aspect-video lg:aspect-square shadow-xl border border-slate-200 dark:border-slate-700/50">
-            <img src="${activeImage}" alt="${latestItem.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
+            <img src="${activeImage}" referrerpolicy="no-referrer" alt="${latestItem.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent p-6 flex flex-col justify-end">
               <span class="text-amber-400 font-bold text-xs uppercase tracking-wider">${latestItem.category} Heritage</span>
               <h3 class="text-white font-bold text-lg leading-snug">${latestItem.title}</h3>
@@ -702,7 +671,6 @@
       lucide.createIcons();
     }
 
-    // Read Data (Public)
     async function fetchPublicItems() {
       const search = document.getElementById('public-search').value.toLowerCase();
       let data = heritageData;
@@ -748,7 +716,7 @@
           <div class="group bg-white/80 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden backdrop-blur-md shadow-md hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div class="relative aspect-video overflow-hidden bg-slate-950 group/img">
-                <img id="card-img-${item.id}" src="${currentImg}" alt="${item.title}" onclick="openLightbox(this.src, '${item.title}')" class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
+                <img id="card-img-${item.id}" src="${currentImg}" referrerpolicy="no-referrer" alt="${item.title}" onclick="openLightbox(this.src, '${item.title}')" class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
                 
                 <div class="absolute top-3 left-3 z-10">
                   <span class="text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-md border ${item.category === 'Historical' ? 'bg-amber-500/20 text-amber-800 dark:text-amber-300 border-amber-500/30' : 'bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border-emerald-500/30'}">
@@ -770,7 +738,7 @@
 
                 <div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-1.5 px-2 z-10">
                   ${images.map((img, idx) => `
-                    <img id="thumb-${item.id}-${idx}" src="${img}" onclick="changeCardImage('${item.id}', ${idx}, event)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-cover ${idx === activeIdx ? 'border-2 border-amber-400 opacity-100' : 'border border-white/30 opacity-60 hover:opacity-100'} transition-all cursor-pointer" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
+                    <img id="thumb-${item.id}-${idx}" src="${img}" referrerpolicy="no-referrer" onclick="changeCardImage('${item.id}', ${idx}, event)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-cover ${idx === activeIdx ? 'border-2 border-amber-400 opacity-100' : 'border border-white/30 opacity-60 hover:opacity-100'} transition-all cursor-pointer" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
                   `).join('')}
                 </div>
               </div>
@@ -791,7 +759,6 @@
       lucide.createIcons();
     }
 
-    // Read Data (Admin)
     async function fetchAdminItems() {
       if (!isAdminAuthenticated) return;
       
@@ -813,7 +780,7 @@
           <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition">
             <td class="py-4 px-6">
               <div class="flex items-center space-x-3">
-                <img src="${previewImg}" class="w-12 h-12 rounded-xl object-cover bg-slate-200 dark:bg-slate-950 border border-slate-300 dark:border-slate-700/50" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
+                <img src="${previewImg}" referrerpolicy="no-referrer" class="w-12 h-12 rounded-xl object-cover bg-slate-200 dark:bg-slate-950 border border-slate-300 dark:border-slate-700/50" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80'">
                 <div>
                   <p class="font-bold text-slate-900 dark:text-white">${item.title}</p>
                   <p class="text-xs text-slate-500 line-clamp-1">${item.description}</p>
@@ -840,7 +807,6 @@
       lucide.createIcons();
     }
 
-    // Create & Update Handler
     async function handleFormSubmit(e) {
       e.preventDefault();
       if (!isAdminAuthenticated) return;
@@ -875,7 +841,6 @@
       fetchPublicItems();
     }
 
-    // Edit Item
     async function editItem(id) {
       if (!isAdminAuthenticated) return;
 
@@ -901,7 +866,6 @@
       }
     }
 
-    // Delete Item
     async function deleteItem(id) {
       if (!isAdminAuthenticated) return;
 
@@ -916,7 +880,6 @@
       }
     }
 
-    // Modal Display Functions
     function openFormModal(isEdit = false) {
       document.getElementById('modal-title').innerText = isEdit ? "Edit Heritage Record" : "Add Heritage Record";
       document.getElementById('item-modal').classList.remove('hidden');
