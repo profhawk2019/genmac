@@ -572,35 +572,43 @@
 
     // 3. Fetch data asynchronously
     async function fetchData() {
-      const { data, error } = await _supabase
-        .from('heritage_records')
-        .select('*');
+  // 1. Point to the actual element ID present in your HTML (e.g., 'public-cards-grid')
+  const container = document.getElementById('public-cards-grid');
 
-      const container = document.getElementById('data-container');
+  // 2. Add a null check to prevent the script from crashing
+  if (!container) {
+    console.error("DOM Error: Could not find container element '#public-cards-grid'. Check your HTML element IDs.");
+    return;
+  }
+document.getElementById('data-container').innerText = ...;
+  // 3. Perform your Supabase fetch
+  const { data, error } = await _supabase
+    .from('heritage_records')
+    .select('*');
 
-      if (error) {
-        container.innerText = 'Error loading data: ' + error.message;
-        return;
-      }
+  if (error) {
+    container.innerHTML = `<p class="text-rose-500">Error loading data: ${error.message}</p>`;
+    return;
+  }
 
-      if (!data || data.length === 0) {
-        container.innerText = 'No records found.';
-        return;
-      }
+  if (!data || data.length === 0) {
+    container.innerHTML = `<p class="text-slate-400">No records found.</p>`;
+    return;
+  }
 
-      // Render items to HTML
-      container.innerHTML = data.map(item => `
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-          <h3>${item.title}</h3>
-          <p><strong>Location:</strong> ${item.location}</p>
-          <p>${item.description}</p>
-        </div>
-      `).join('');
-    }
+  // 4. Render items safely
+  container.innerHTML = data.map(item => `
+    <div class="p-4 bg-white dark:bg-slate-800 rounded-xl shadow-md border border-slate-200 dark:border-slate-700">
+      <h3 class="font-bold text-lg text-slate-900 dark:text-white">${item.title}</h3>
+      <p class="text-xs text-amber-500 font-semibold">${item.location}</p>
+      <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">${item.description}</p>
+    </div>
+  `).join('');
+}
    
     // Call fetch on page load
     fetchData();
-    document.getElementById('data-container').innerText = 'Loading...';
+    
   </script>
 </body>
 </html>
