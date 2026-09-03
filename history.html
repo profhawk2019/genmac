@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abridged Historical Account - General MacArthur, Eastern Samar</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @keyframes blob {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.08); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+    .animate-blob { animation: blob 10s infinite ease-in-out; }
+    .animation-delay-2000 { animation-delay: 2s; }
+
+    ::-webkit-scrollbar { width: 8px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #059669; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #047857; }
+  </style>
+
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-amber-400 selection:text-emerald-950 transition-colors duration-300">
+
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/10 dark:bg-emerald-600/20 rounded-full blur-3xl animate-blob"></div>
+    <div class="absolute top-1/2 -right-40 w-96 h-96 bg-amber-500/10 dark:bg-amber-500/15 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+  </div>
+
+  <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+    <div class="w-full max-w-[95%] xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+      <a href="index.html" class="flex items-center space-x-3 group">
+        <img src="IMG_Logo.png" alt="Official Seal" class="w-12 h-12 rounded-full object-contain shadow-md border border-amber-400 group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=100&q=80';">
+        <div>
+          <h1 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">Gen. MacArthur</h1>
+          <p class="text-[10px] sm:text-xs text-emerald-700 dark:text-emerald-400 font-semibold tracking-wider uppercase">Eastern Samar Heritage System</p>
+        </div>
+      </a>
+
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-200/80 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-300/50 dark:border-slate-700/50 transition-colors">
+          <a href="index.html" class="px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 flex items-center space-x-1.5">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Back to Heritage System</span>
+          </a>
+          <span class="px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm bg-amber-500 text-slate-950 shadow-md flex items-center space-x-1.5">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+            <span>Historical Account</span>
+          </span>
+        </nav>
+
+        <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300/50 dark:border-slate-700/50 text-slate-700 dark:text-amber-400 hover:scale-105 transition-all" title="Toggle Light/Dark Theme">
+          <i id="theme-icon-sun" data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+          <i id="theme-icon-moon" data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow w-full max-w-[95%] xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 z-10 space-y-6">
+
+    <!-- HEADER TITLE CARD -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-3xl backdrop-blur-md shadow-md transition-colors duration-300">
+      <div class="flex items-center space-x-4">
+        <img src="IMG_Logo.png" alt="Official Seal" class="w-14 h-14 rounded-full object-contain border-2 border-amber-400 shadow-md" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=100&q=80';">
+        <div>
+          <div class="flex items-center space-x-2">
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Abridged Historical Account¹</h2>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">Official Narrative</span>
+          </div>
+          <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-0.5">From Pre-Hispanic Pamboan to Present-day Township (General MacArthur, Eastern Samar)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HISTORICAL CONTENT CONTAINERS -->
+    <div class="space-y-6 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed text-justify">
+      
+      <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-xl">
+        <p class="text-xs sm:text-sm text-amber-900 dark:text-amber-200 font-medium italic">
+          "No documents, no history." — Charles Seignobos. This comprehensive narrative bridges oral tradition with verifiable archival records to document the complete historical trajectory of the Municipality of General MacArthur, Eastern Samar[cite: 2].
+        </p>
+      </div>
+
+      <div class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-amber-500 mb-4 flex items-center gap-1.5">
+          <i data-lucide="image" class="w-4 h-4"></i> Archival Photographs (Early Civic Buildings & Schools)
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165507.jpg', 'Gabaldon School & Early Civic Building Assembly')">
+            <img src="IMG_20260817_165507.jpg" alt="Historical Building Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80';">
+            <span class="text-[11px] text-slate-400 mt-2 block font-medium">Early Municipal & Civic Gathering</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165453.jpg', 'GMCES School Grounds & Civic Celebration')">
+            <img src="IMG_20260817_165453.jpg" alt="School Grounds Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80';">
+            <span class="text-[11px] text-slate-400 mt-2 block font-medium">Civic Grounds & Community Life</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165435.jpg', 'Historical Town Gathering at Gabaldon Structure')">
+            <img src="IMG_20260817_165435.jpg" alt="Gabaldon Building Historical Photo" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80';">
+            <span class="text-[11px] text-slate-400 mt-2 block font-medium">Gabaldon Educational Assembly</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="book-open-check" class="w-5 h-5 text-amber-500"></i>
+          Reframing the Past: Between Oral Tradition and Documented History
+        </h3>
+        <p>For the longest time, the history of the Municipality of General MacArthur has been shaped by oral tradition stories passed down through generations, rich in meaning yet often unverified[cite: 2]. Today, however, through careful research and the examination of documentary evidence, the historical past of Pamboan — the earliest known name of the settlement — has been brought to light with greater clarity[cite: 2].</p>
+        <p>This does not seek to discredit oral tradition, but rather to meet it halfway[cite: 2]. Both oral accounts and documented sources contribute to a fuller understanding of the past[cite: 2]. Yet, as emphasized by the French historian Charles Seignobos, "No documents, no history."[cite: 2] Thus, historical reconstruction must ultimately be grounded in verifiable evidence[cite: 2].</p>
+        <p>An important scholarly effort, "An Essay on Pamboan: A Pre-Historic Name of General MacArthur," demonstrates how the town's identity evolved from contested legends such as Pamubuhan and Tugas, to historically grounded narratives supported by archival sources[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="file-text" class="w-5 h-5 text-amber-500"></i>
+          From Oral Tradition to Written Records
+        </h3>
+        <p>In the oral traditions of the people of what is now the northern part of Eastern Visayas, the early settlement associated with Pamboan is remembered not only as a place of habitation, but as a landscape shaped by both forest and sea where livelihood, environment, and language intertwined in naming[cite: 2].</p>
+        <p>One strand of local memory holds that the area was once called "Tugas," a term referring to a strong and durable hardwood tree that once thrived in abundance in the locality[cite: 2]. In this telling, the name reflects a landscape thick with forest resources, where early inhabitants relied on timber not only for shelter and tools but also as part of their daily subsistence economy[cite: 2]. The presence of hardwood forests thus became a defining marker of place identity, anchoring the community's early designation in the natural environment that sustained it[cite: 2].</p>
+        <p>Another oral tradition shifts the focus from the forest to the sea[cite: 2]. In this version, the settlement was known as "Pamubuhan," derived from local linguistic roots associated with catching fish and gathering marine products[cite: 2]. Here, the name evokes the everyday labor of coastal life — net fishing, gleaning shells, and harvesting the sea's abundance[cite: 2]. The sea is not merely a backdrop but the center of livelihood, shaping both social practice and communal identity[cite: 2].</p>
+        <p>Over time, linguistic transformation and colonial-era transcription are said to have gradually altered "Pamubuhan" into "Pambujan," the name that later appears in Spanish colonial records[cite: 2]. This evolution reflects a broader historical pattern in which indigenous place names were reshaped through Spanish orthographic interpretation and administrative documentation, often simplifying or reconfiguring local phonetics[cite: 2].</p>
+        <p>Within this layered tradition, the transition from Tugas to Pamubuhan to Pambujan symbolizes more than a change in names[cite: 2]. It reflects shifting emphases in community life — from forest resources to maritime subsistence, and eventually to colonial categorization[cite: 2]. The modern municipality of Pambujan thus carries within its name traces of both ecological memory and lived coastal experience[cite: 2].</p>
+        <p>In this way, the legend of Pamboan is not a single fixed origin story, but a convergence of memories — where land, sea, and language continuously reshape how a place is remembered and named across generations[cite: 2].</p>
+        <p>While oral traditions offer rich and varied explanations for the origins of Pamboan, early written accounts provide another perspective grounded in observation[cite: 2]. In the work of Pedro Chirino, particularly in his 1610 chronicle of the Philippine Islands, the name Pamboan is associated with the presence of wild boars in the area[cite: 2].</p>
+        <p>This account suggests that the place-name may have been derived from a defining feature of the local environment, as perceived by early Spanish missionaries — an area inhabited or frequented by wild swine[cite: 2]. Such naming practices were common in early colonial documentation, where unfamiliar places were often identified based on visible natural characteristics, fauna, or prevailing conditions encountered by chroniclers[cite: 2].</p>
+        <p>When organized alongside oral traditions, this explanation adds another layer to the evolving identity of Pamboan[cite: 2]. While indigenous memory emphasizes either the abundance of hardwood (Tugas) or the fishing-based livelihood (Pamubuhan), Chirino's account introduces a third dimension — one rooted in external observation and colonial recording[cite: 2].</p>
+        <p>Taken together, these perspectives illustrate how the name Pamboan may not stem from a single origin, but rather from multiple interpretations shaped by environment, livelihood, and historical documentation[cite: 2].</p>
+        <p>Finally, in another documentation, the name of Pambujan may be understood not only through language and livelihood, but also through the physical character of the land itself — particularly its relationship with water[cite: 2]. In many early settlements across Eastern Visayas, communities formed along coastlines, river mouths, and natural inlets that served as gateways between inland habitation and the sea[cite: 2].</p>
+        <p>In this context, the word Pambujan is often interpreted as emerging from a landscape defined by a body of water that opens into the settlement[cite: 2]. Whether a river mouth, estuary, coastal inlet or a harbor within a bay as in the case of General MacArthur — such an opening would have been central to the life of the community[cite: 2]. It functioned as a natural harbor, a route for travel, and a source of sustenance[cite: 2]. Boats could enter and leave with ease, linking the settlement to nearby islands and to wider trading networks that characterized pre-colonial Visayan society[cite: 2].</p>
+        <p>Linguistically, the structure of the word suggests a place associated with an action or condition[cite: 2]. The prefix "pam-" in many Visayan languages denotes a location tied to a particular function or activity, while the root may be connected to the idea of opening, flowing, or accessing water routes[cite: 2]. Over time, the term evolved into Pambujan, signifying not merely a geographic label, but a description of place: a settlement shaped by the presence of an opening waterway[cite: 2].</p>
+        <p>This interpretation aligns with patterns of indigenous place-naming, where names arise from ecological features that are most visible and most vital to survival[cite: 2]. The "opening" becomes both literal and symbolic — representing access to resources, movement, and connection[cite: 2].</p>
+        <p>Thus, the origin of the name Pambujan reflects a community whose identity was inseparable from its waterscape — a place where land meets sea, and where a natural opening defined the rhythm of life, trade, and interaction long before the arrival of colonial record-keepers[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="anchor" class="w-5 h-5 text-amber-500"></i>
+          Pre-Hispanic Interlude
+        </h3>
+        <p>In the deeper currents of pre-Hispanic Eastern Visayas, the settlement known in local memory as Pamboan emerges not as an isolated village, but as part of a wider maritime world already active by the 13th century[cite: 2].</p>
+        <p>At this time, long before colonial mapping or administrative naming, the islands of the archipelago were connected through Austronesian sea routes that linked coastal communities across the South China Sea and the broader Southeast Asian trading sphere[cite: 2]. Although not directly named in Chinese records, places corresponding to present-day Eastern Visayas would have participated in these fluid networks of exchange and movement[cite: 2].</p>
+        <p>The closest external glimpse of this world comes from Chau Ju-Kua (Zhao Rugua) in his Chu fan-chi (circa 1225), where he described distant "barbarian islands" south of China[cite: 2]. These were not fixed political territories, but scattered maritime communities engaged in barter trade[cite: 2]. Goods such as pearls, tortoise shells, beeswax, and medicinal products flowed outward, while ceramics, iron, and silk flowed inward — signaling a relationship built on reciprocity rather than domination[cite: 2].</p>
+        <p>Within this broader oceanic setting, Pamboan may be understood as one of the small, fragmented yet active coastal nodes of this network[cite: 2]. It likely existed as a riverine or shoreline settlement oriented toward the sea, where canoe-borne trade, seasonal fishing, and inter-island exchange shaped daily life[cite: 2]. Its people would have shared in the Austronesian seafaring tradition — navigating by wind, current, and oral knowledge of routes that connected them to neighboring islands, and more distant trading partners[cite: 2].</p>
+        <p>Though Chau Ju-Kua never names Pamboan, his account helps illuminate the economic and cultural environment in which it likely existed[cite: 2]. Pamboan was part of a decentralized yet interconnected maritime landscape — one where identity was shaped not by formal states, but by kinship networks, exchange relations, and seaborne mobility[cite: 2].</p>
+        <p>Thus, Pamboan in the 13th century can be imagined as a living point within a larger ocean highway: a community quietly participating in a pre-colonial world already tied to regional commerce, long before it would later be redefined through Spanish colonial administration and renamed in subsequent historical eras[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="compass" class="w-5 h-5 text-amber-500"></i>
+          Early Contacts and the Wider World (1512-1565)
+        </h3>
+        <p>The earliest recorded name of the settlement was Pamboan, believed to have existed even before Spanish colonization[cite: 2]. Its existence in this early period reflects the presence of an established community shaped by the rhythms of the sea and the resources it provided[cite: 2]. Situated along the coast of Eastern Samar, Pamboan was naturally positioned within the maritime lifeways that connected various settlements across the archipelago[cite: 2].</p>
+        <p>The coastal geography of Pamboan suggests that it was not an isolated community[cite: 2]. Instead, it likely participated in early maritime trade networks, where local inhabitants exchanged goods, knowledge, and cultural practices with neighboring communities and passing traders[cite: 2]. Such interactions would have contributed to the gradual development of social organization, subsistence practices, and early forms of local economy[cite: 2].</p>
+        <p>Notably, Pamboan also holds a subtle yet significant place within the broader narrative of global exploration[cite: 2]. During the historic voyage of the Magellan-Elcano expedition in 1521, while searching for anchorage before proceeding to Homonhon Island, no permanent contact was recorded in Pamboan itself, yet its geographic proximity places it within this historic route recorded by Antonio Pigafetta at approximately 11° north latitude — situating it within a moment of profound global significance[cite: 2]. On March 16, 1521, the expedition reportedly sighted land in the vicinity while navigating toward Homonhon Island, marking one of the earliest European encounters with the Philippine archipelago[cite: 2].</p>
+        <p>Thus, the Pre-Hispanic and Early Contact Period of Pamboan represents a time of quiet continuity and emerging connections — an era defined by indigenous maritime life[cite: 2].</p>
+        <p>Further contact occurred in 1565, when Miguel López de Legazpi arrived near present-day Oras and encountered local datus such as Calayon, Maluco, Dumana, Limbaga, and Magabilen — evidence of organized indigenous societies in the region, and unique native names[cite: 2].</p>
+        <p>Into the shores of the settlement, note that the earliest visitors were Augustinians (1585; 1768-1795)[cite: 2]. Jesuits followed ten years later (between 16 July 1595 to 15 October 1596)[cite: 2]. In between the years, visita Pamboan was silent in historical records, up until it was abandoned in 1660; 1864 to 1870[cite: 2]. Their mission stations were taken over by the Augustinians upon their expulsion through a Pragmatic Sanction of 1767 by King Charles III of Spain that was heavily influenced by the Spanish statesman Pedro Pablo Abarca de Bolea, Count of Aranda[cite: 2]. And later, Pope Clement XIV formally suppressed the Jesuits worldwide through the papal brief Dominus ac Redemptor (1773) effectively confirming what monarchs like Spain had already enforced[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="church" class="w-5 h-5 text-amber-500"></i>
+          Jesuit Missionary Period (1595-1768)
+        </h3>
+        <p>The arrival of Jesuit missionaries around 1595 marked a new chapter in the history of Pamboan, as the settlement was formally incorporated into the expanding network of Spanish colonial evangelization[cite: 2]. During this period, Pamboan was established as a visita, or mission station, which meant it was placed under the spiritual care of a larger parish[cite: 2]. This arrangement reflected the broader Spanish strategy of extending religious influence across distant and often hard-to-reach coastal communities in Eastern Samar[cite: 2].</p>
+        <p>Despite these efforts, the mission in Pamboan faced considerable difficulties[cite: 2]. The limited number of missionaries assigned to the area made it challenging to sustain consistent religious instruction and administration[cite: 2]. Geographic isolation, logistical constraints, and the dispersed nature of local settlements further complicated the Jesuits' work[cite: 2]. As a result, the mission struggled to achieve long-term stability and growth[cite: 2].</p>
+        <p>By 1660, after decades of intermittent activity, the Jesuits ultimately abandoned the mission in Pamboan[cite: 2]. Their departure marked a turning point, leaving the settlement with a limited ecclesiastical presence[cite: 2]. What followed was a prolonged period — spanning more than a century — characterized by a historical silence (1660-1768)[cite: 2]. During this time, there are few surviving records, making it difficult to reconstruct the social, political, and economic conditions of the community with certainty[cite: 2].</p>
+        <p>This gap in documentation highlights a common challenge in Philippine local history: the uneven preservation of records, especially in remote areas[cite: 2]. While the absence of written sources limits historical clarity, it also underscores the importance of oral traditions and archaeological inquiry in piecing together the life of early communities like Pamboan during this largely undocumented period[cite: 2].</p>
+        <p>This era of silence (1660-1768) presents one of the greatest challenges in reconstructing local history[cite: 2]. Without sufficient records, historians must rely on fragmentary evidence while avoiding speculation[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="shield-alert" class="w-5 h-5 text-amber-500"></i>
+          Mobility, Trade, and Survival in the 18th Century
+        </h3>
+        <p>In the 18th century, life in Samar unfolded under conditions of uncertainty, resilience, and constant movement[cite: 2]. Though historical records remain sparse, fragments from external accounts — particularly testimonies gathered in 1779 — offer glimpses of a region quietly engaged in wider economic networks[cite: 2]. Coastal communities participated in maritime trade that connected them to Manila, exchanging products such as coconut oil, beeswax, marine goods, and finely woven fabrics[cite: 2]. These activities suggest that even relatively remote settlements were not isolated, but instead integrated into broader patterns of commerce across the archipelago[cite: 2].</p>
+        <p>Yet this fragile economic rhythm was repeatedly disrupted[cite: 2]. The persistent threat of Moro raids cast a long shadow over daily life[cite: 2]. These incursions brought devastation — settlements were burned, livelihoods destroyed, and families forced to flee inland to seek refuge in the mountains[cite: 2]. Trade routes, once vital channels of exchange, fell silent for nearly a decade as fear and instability overtook the region[cite: 2].</p>
+        <p>In response, communities adapted through mobility[cite: 2]. Movement became not merely a choice, but a strategy for survival[cite: 2]. This pattern was not new; Franciscan Order writings as early as 1726 had already observed the fluidity of settlements in Samar[cite: 2]. People relocated in search of safety, moving away from vulnerable coastlines or areas exposed to attack[cite: 2]. At the same time, economic necessity drove them toward places rich in resources — fertile lands for cultivation, abundant waters for fishing, and routes that could sustain trade when conditions allowed[cite: 2].</p>
+        <p>Mobility also carried a quieter form of resistance[cite: 2]. By relocating, some communities avoided the reach of colonial authorities, evading tribute obligations and asserting a degree of autonomy over their lives[cite: 2]. This constant shifting between coast and interior, between danger and opportunity reveals a population deeply attuned to its environment and the pressures of its time[cite: 2].</p>
+        <p>In places like Pamboan, such movement shaped the very nature of settlement[cite: 2]. Rather than fixed and permanent, communities were fluid, forming and reforming in response to external threats and internal needs[cite: 2]. What emerges from these accounts is not simply a story of disruption, but one of adaptation — a testament to how early inhabitants navigated the intertwined forces of trade, conflict, and survival[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="refresh-cw" class="w-5 h-5 text-amber-500"></i>
+          Transition of Religious Administration (1768-1795)
+        </h3>
+        <p>The year 1768 marked a significant turning point in the religious and administrative history of Pamboan and its surrounding communities[cite: 2]. With the expulsion of the Society of Jesus from the Philippines, the structure of ecclesiastical governance underwent a major reorganization[cite: 2].</p>
+        <p>In their place, the Order of Saint Augustine assumed responsibility for the mission territories, taking on the task of continuing the work of evangelization and parish administration across Samar[cite: 2].</p>
+        <p>Under the Augustinian administration, Pamboan was no longer managed as an isolated mission but was instead integrated into a broader ecclesiastical network[cite: 2]. It became administratively linked to larger and more established centers such as Guiuan, Balangiga, and Quinapondan[cite: 2]. This restructuring reflects the colonial practice of consolidating smaller and less accessible settlements under the supervision of nearby principal towns, ensuring more efficient religious oversight and governance[cite: 2].</p>
+        <p>Despite these administrative changes, the community did not remain static[cite: 2]. Around 1770, records indicate the presence of social interaction and trade (pagkikirigta), suggesting that economic life continued to develop even amid shifting colonial control; hence, traces of Tabo tradition every Sunday[cite: 2]. These interactions point to an active local society engaged in exchanges with neighboring settlements, reinforcing the idea that Pamboan remained part of regional networks of movement, trade, and communication[cite: 2].</p>
+        <p>By 1795, another transition occurred when ecclesiastical authority was transferred to the Order of Friars Minor[cite: 2]. This change once again redefined the religious leadership of the area, introducing new approaches to pastoral care and mission work[cite: 2]. Despite the succession of different religious orders, the continuity of community life persisted, demonstrating the resilience of local society amid external administrative changes[cite: 2].</p>
+        <p>Overall, this period illustrates a dynamic phase in Pamboan's history — one shaped by shifting religious authorities, evolving administrative linkages, and the enduring presence of local economic and social activity[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="git-branch" class="w-5 h-5 text-amber-500"></i>
+          Fluid Colonial Governance Structures (1768-1852)
+        </h3>
+        <p>The late 18th to mid-19th century was a period of continual transition for communities in Samar, marked by shifting layers of colonial administration that reshaped both governance and religious life[cite: 2]. A major turning point came in 1768, when the Society of Jesus was expelled from the Philippines[cite: 2]. With their departure, long-established networks were disrupted, and responsibility for these areas passed first to the Order of Saint Augustine, and later, in 1795, to the Order of Friars Minor[cite: 2].</p>
+        <p>For local communities such as Pamboan — later known as Pambujan (1852) — these changes were not merely administrative; they were deeply felt in everyday life[cite: 2]. Civil and religious affiliations did not always align, creating a layered and sometimes fragmented system of authority[cite: 2]. In civil matters, the community fell under the jurisdiction of Quinapondan, linking it to a broader colonial administrative network[cite: 2]. Spiritually, however, it maintained ties with other ecclesiastical centers such as Guiuan or Balangiga, depending on the shifting assignments of missionary orders[cite: 2].</p>
+        <p>These overlapping jurisdictions reflect the fluid and often adaptive nature of Spanish colonial governance in the region[cite: 2]. Rather than fixed boundaries, authority was frequently reorganized in response to logistical challenges, missionary availability, and broader imperial priorities[cite: 2].</p>
+        <p>This pattern of restructuring continued into the 19th century[cite: 2]. In 1852, Pambujan was formally transferred to the civil jurisdiction of Lanang[cite: 2]. This move underscores how colonial authorities continually recalibrated administrative boundaries in an effort to maintain control, improve governance, or respond to local conditions[cite: 2].</p>
+        <p>Taken together, these shifts reveal a community navigating not only geographical and economic challenges, but also the evolving frameworks of colonial rule[cite: 2]. Governance was not static; it was a dynamic process, shaped by imperial decisions, missionary transitions, and the realities on the ground[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="map" class="w-5 h-5 text-amber-500"></i>
+          Emergence of Pambujan (1852-1864)
+        </h3>
+        <p>By the mid-19th century, the settlement had come to be known as Pambujan, reflecting its growing identity within the evolving framework of Spanish colonial administration[cite: 2]. This period was marked by significant restructuring, as colonial authorities sought to refine governance and strengthen ecclesiastical organization across Eastern Samar[cite: 2].</p>
+        <p>A key administrative change occurred on January 23, 1852, when civil jurisdiction over the area was transferred from Quinapundan to Lanang (now Llorente)[cite: 2]. This shift indicates a broader effort by the colonial government to reorganize territorial control, likely aimed at improving administrative efficiency and consolidating authority in more strategically located centers[cite: 2]. Such realignments were common during the late Spanish period, as authorities adjusted boundaries to better manage distant and dispersed settlements[cite: 2]. The move may probably suggest a momentous event through the bell declared as the LGU's Local Cultural Property called the Batingaw ng Kapilya ng San Isidro Labrador (as provided by the Philippine Registry of Heritage in 2024) casted in 1852 that is found inside the Church of St. Joseph today[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="landmark" class="w-5 h-5 text-amber-500"></i>
+          Formation of a Pueblo (1864)
+        </h3>
+        <p>A more decisive transformation took place in 1864, when a Royal Decree formally established an independent pueblo and parish[cite: 2]. This marked the official recognition of the settlement as a self-governing unit within both civil and ecclesiastical structures[cite: 2]. The creation of the pueblo was not merely an administrative act but also a reflection of the community's development and its readiness to function as an independent local center[cite: 2].</p>
+        <p>Rather than emerging from a single settlement, this new political unit was formed through the union of two visitas — Nag-as and Pambujan — marking a significant reorganization under Spanish colonial administration[cite: 2]. Contrary to common misconceptions, these two communities were co-equal founding entities, neither subordinate to the other[cite: 2]. Instead, both contributed equally to the establishment of the pueblo, highlighting a shared origin and mutual significance in the formation of the municipality[cite: 2]. As documented in the works of Huerta (1865) and Marín y Morales, it said: "By virtue of a Royal Decree dated January 4, 1864, issued during the administration of Governor-General Rafael de Echagüe, the visitas of Nag-as and Pambujan were separated from Lanang and constituted into an independent pueblo and parish."[cite: 2]</p>
+        <p>This event clarifies and corrects long-standing misconceptions about the origins of the municipality[cite: 2]. It is often assumed that Nag-as stood as the sole foundation of the pueblo, or that Pambujan existed merely as its subordinate extension[cite: 2]. Historical evidence, however, points to a different reality[cite: 2]. Both Nag-as and Pambujan were recognized as integral and equal components in the creation of the pueblo[cite: 2]. Neither held primacy over the other; instead, they were co-founders, jointly constituting the new administrative and community center[cite: 2].</p>
+        <p>This dual-origin structure is significant[cite: 2]. It reveals that the pueblo was not the product of a singular expansion, but rather a convergence of two established communities, each contributing to its formation[cite: 2]. Such an arrangement reflects a more collaborative foundation — one that acknowledges shared space, shared governance, and shared identity from the very beginning[cite: 2].</p>
+        <p>In this light, the history of the municipality is best understood not as a linear progression from one dominant settlement, but as a merging of parallel histories[cite: 2]. The pueblo's origins lie in the partnership between Nag-as and Pambujan, a union that underscores the collective roots of the community and shapes its historical identity to this day[cite: 2].</p>
+        <p>This historical account underscores the importance of recognizing the dual foundations of the pueblo and correcting oversimplified narratives that privilege one community over the other[cite: 2]. Together, Nag-as (1864) and Pambujan (1852) formed the institutional and communal basis of what would later evolve into a more complex and dynamic municipality[cite: 2]. Thus, this period represents a critical point in the history of the area — one defined by administrative consolidation, official recognition, and the emergence of a distinct local identity within the Spanish colonial system[cite: 2].</p>
+        <p>It is of equal importance to note as well that on pages 206-207 of the Status of Missions in The Philippines, documents of 1612-1613 archival records from Archivo General de Indias reflected two hundred (200) tributes for Pamboan (sic, Pambujan) alongside with Guiuan having 100 tributes; Basay, 430; Dagami, 382; Palo, 270; Abuyog, 276; Buraguen, 595; Barugo, 172; Dulag, 371 among others[cite: 2]. A report of Fr. Gregorio Lopez, SJ in 1612, on his Annuae Litterae as part of the Residence of Dulag Jesuit Mission[cite: 2].</p>
+        <p>For one thing, it simply tells us that population in the settlement once called Pamboan, now at this time period - Pambujan was of significant number — a considerable number worthy of the establishment of a fortress for defense against Moro raiders, such as Cota de Pambujan in 1754[cite: 2]. And for another, Nag-as only appeared in written documents in 1864 as a visita[cite: 2]. As to Nag-as' population recorded in the Censo de las Islas Filipinas tomado bajo la direccion de la Comision Filipina en 1903 proved that the big chunk of the population was from the residents of Pambujan placing 9th on the most populous towns in Eastern Samar at 4,150[cite: 2].</p>
+        <p>Moreover, Moro attacks against the poblacion of Pambujan (1782) caused dispersal and resettlement (Cruikshank, on Samar 1768-1898) only to return to the old site in 1784 — among the indicators of mobility[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="cloud-lightning" class="w-5 h-5 text-amber-500"></i>
+          Crisis, Calamity, and Change (Late 19th Century)
+        </h3>
+        <p>The closing decades of Spanish rule were a time of profound uncertainty for communities across Samar — a period defined by crisis, calamity, and the necessity to endure[cite: 2]. Long-standing threats had not disappeared[cite: 2]. Raids from seafaring groups, often referred to in colonial accounts as Moro raiders, continued to unsettle coastal settlements, forcing vigilance and, at times, sudden flight[cite: 2]. Alongside these dangers were growing political tensions, as the wider Philippine archipelago edged closer to upheaval in the final years of Spanish colonial period[cite: 2].</p>
+        <p>Yet it was nature itself that delivered one of the most devastating blows[cite: 2]. On October 12-13, 1897, a powerful storm — remembered in historical accounts as el baguio de Samar y Leyte — swept across the region with destructive force[cite: 2]. The town of Hernani was among the hardest hit, nearly wiped out by the intensity of the winds and flooding[cite: 2]. Homes were destroyed, livelihoods lost, and entire communities left struggling to recover in the storm's aftermath[cite: 2].</p>
+        <p>These overlapping crises — human conflict, political strain, and environmental disaster — placed immense pressure on local populations[cite: 2]. And yet, they also revealed something enduring[cite: 2]. Communities adapted as they had in earlier periods: rebuilding after destruction, relocating when necessary, and drawing on shared resources and social ties to survive[cite: 2].</p>
+        <p>In this way, the late 19th century was not only an era of hardship, but also one that tested and ultimately strengthened the resilience of the people[cite: 2]. Their ability to confront repeated disruption and still endure speaks to a long-standing pattern of adaptation — one that would carry them forward into the dramatic changes of the century to come[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="swords" class="w-5 h-5 text-amber-500"></i>
+          Late Spanish Period and Turbulence (1864-1899)
+        </h3>
+        <p>Following its formal establishment as a pueblo in 1864, the town entered a period marked by both progress and instability[cite: 2]. In its early years, particularly between 1864 and 1870, the community experienced episodes of disruption and possible abandonment[cite: 2]. These fluctuations may have been influenced by a combination of factors, including population movements, administrative adjustments, and the broader challenges of maintaining a newly established settlement under colonial rule[cite: 2]. Despite these difficulties, the town persisted and gradually reasserted its presence as a developing local center[cite: 2].</p>
+        <p>Amid these uncertainties, important signs of institutional development began to emerge[cite: 2]. On 7 January 1869, the establishment of the Escuela de Primera Enseñanza signified a growing commitment to formal education, providing basic instruction to the youth and laying the foundation for literacy and learning in the community[cite: 2]. Alongside this, the creation of the Tribunal, which served as the local center of governance and administration, reflected the town's evolving civil structure and its increasing integration into the Spanish colonial system of local government[cite: 2]. These institutions marked key milestones in the consolidation of both civic life and community organization[cite: 2].</p>
+        <p>As the 19th century drew to a close, the town, like much of the Philippines, was drawn into the upheavals of the Philippine Revolution[cite: 2]. The growing unrest disrupted not only political structures but also ecclesiastical stability[cite: 2]. On January 10, 1899, Fr. Felipe Vasquez was captured in Hernani, an event that underscores the volatility of the period and its impact on local religious leadership[cite: 2].</p>
+        <p>Fr. Vasquez's long record of service, spanning from 1876 to 1898, highlights the difficulties faced by the clergy in maintaining consistent pastoral care in the region[cite: 2]. His repeated assignments to the area reflect both the shortage of religious personnel and the demanding conditions of ministering to dispersed and often remote communities during a time of social and political upheaval[cite: 2].</p>
+        <p>Together, these events illustrate a period of transition — one characterized by alternating phases of instability and development, as the town navigated the challenges of colonial administration, emerging institutions, and the transformative forces of revolution at the close of the Spanish era[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="building" class="w-5 h-5 text-amber-500"></i>
+          American Period and Administrative Changes (1902-1947)
+        </h3>
+        <p>The onset of the American colonial period brought significant administrative restructuring to the municipalities of Eastern Samar, including the communities of Pambujan, Nag-as, and Lanang[cite: 2]. In an effort to streamline local governance and improve administrative efficiency, these three settlements were formally merged into a single municipality under Act No. 960 on October 23, 1902[cite: 2]. This consolidation reflects the American colonial government's broader policy of reorganizing local political units to establish clearer systems of control and governance[cite: 2].</p>
+        <p>A decade later, in 1912, another major adjustment took place when the seat of government was transferred from Nag-as to Pambujan[cite: 2]. This shift marked a reorientation of administrative focus and the emergence of new local centers of authority[cite: 2]. This arrangement lasted for fourteen years, via Executive Order No. 7 on 28 February 1912[cite: 2]. During this period, the places were often referred to as "New Hernani" (Pambujan) and "Old Hernani" or Hernani in Padang (Nag-as), reflecting both continuity and change in local identity as governance structures were redefined[cite: 2]. The appointed captain was Jacinto Candido[cite: 2]. Contrary to some claims, Nag-as was not reduced to a barrio; rather, the change represented a relocation of the town center or poblacion[cite: 2].</p>
+        <p>By 1913, the arrangement underwent further clarification with the legal separation of the administrative entities, signaling attempts to stabilize local governance structures amid ongoing transitions[cite: 2]. However, these configurations were not permanent[cite: 2]. In 1926, an Executive Order issued under American Governor-General Leonard Wood reversed the earlier arrangement, restoring previous administrative boundaries and consolidations[cite: 2].</p>
+        <p>Overall, the American period in the history of Pambujan was characterized by repeated administrative reorganizations that reflected the colonial agenda of rationalizing local governance[cite: 2]. These changes shaped the political landscape of the region and set the stage for the eventual emergence of more stable and independent municipal identities in the post-colonial era[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="scale" class="w-5 h-5 text-amber-500"></i>
+          Local Governance in Pambujan Sur (1912-1947)
+        </h3>
+        <p>The American period introduced new administrative frameworks in the Philippines, and with them came important changes in local governance[cite: 2]. For the pueblo, one of the most notable developments occurred in 1912, when the seat of government transferred to Pambujan from Nag-as[cite: 2]. This shift placed Pambujan at the administrative center of the municipality, concentrating political functions, public offices, and civic activity in the area[cite: 2].</p>
+        <p>For fourteen years, this arrangement defined the structure of local governance[cite: 2]. However, in 1926, the decision was reversed under the authority of Leonard Wood, restoring the poblacion to Nag-as[cite: 2]. Such a move reflects the continuing adjustments characteristic of the American colonial administration, which often re-evaluated local arrangements in pursuit of efficiency, accessibility, or broader policy goals[cite: 2].</p>
+        <p>Crucially, this transfer — and its eventual reversal — should not be understood as a rise or decline of one community over the other[cite: 2]. It did not signify a demotion of Nag-as, nor an elevation of Pambujan (or Pambujan Sur as recorded in 1940 documents) in a permanent sense[cite: 2]. Rather, it was a relocation of administrative functions within a single pueblo, where both areas remained integral parts of the same town[cite: 2].</p>
+        <p>Seen in this light, the period from 1912 to 1926 illustrates the fluid nature of governance during the American era[cite: 2]. Authority could shift geographically, but the shared identity and historical foundation of the community endured, reinforcing the idea that governance structures were adaptable tools rather than fixed hierarchies[cite: 2].</p>
+        <p>From 1926 to 1947, Pambujan became administratively part of Hernani, indicating another phase of integration within a larger municipal framework[cite: 2]. This period illustrates the fluid nature of local governance under American rule, where administrative boundaries were frequently adjusted in response to political, economic, and administrative considerations[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="flag" class="w-5 h-5 text-amber-500"></i>
+          Birth of General MacArthur and Institutional Consolidation (1947-1965)
+        </h3>
+        <p>The mid-20th century marked a defining phase in the history of General MacArthur — a period defined by political creation, postwar recovery, and the steady formation of both civil and ecclesiastical institutions[cite: 2].</p>
+        <p>The foundation of the municipality was laid on June 22, 1947, with the enactment of Republic Act No. 193[cite: 2]. This law formally established an independent town composed of barrios formerly under Hernani, including Pambujan Sur (visited by the Augustinians in 1585, set up by the Jesuits in 1595, appeared Pamboan in Gregorio Lopez's 1612 Annuae Litterae, known as Pambujan [1852] during the Spanish colonial rule in the writings of Jose Delgado, later known as Pambujan Sur in 1940), Calutan (1912), San Isidro (known as Iraya, 1912), Vigan (1912), Binalay (known as Sun-og prior to 1946), Camcueves (1936), Domrog (set up in 1936 at the rise of mining activity in the area), and Pingan (set up in 1946)[cite: 2]. The creation of the municipality was both a political milestone, and a recognition of the area's growing capacity for self-governance[cite: 2].</p>
+        <p>The choice of name reflected the spirit of the times[cite: 2]. The municipality was named in honor of Douglas MacArthur, whose leadership in the liberation of the Philippines during the Second World War left a lasting imprint on national memory[cite: 2]. This act of naming symbolized gratitude, as well as a forward-looking sense of rebuilding and renewal in the postwar era[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="trending-up" class="w-5 h-5 text-amber-500"></i>
+          Postwar Growth and Local Development (1947-1951)
+        </h3>
+        <p>The early years of the municipality were marked by rapid transformation, driven largely by infrastructure development[cite: 2]. The opening of inland roads became a crucial turning point, reshaping both the physical and economic landscape[cite: 2]. These developments facilitated the movement of goods and agricultural produce, stimulated local trade, and encouraged population expansion beyond traditional coastal settlements[cite: 2]. Previously isolated interior areas were gradually integrated into a more cohesive municipal system[cite: 2].</p>
+        <p>As new settlements emerged inland, not all were immediately recognized as formal barrios[cite: 2]. Communities such as Barangay Garcia (identified as Ugagamaw, later incorporated into the municipality of Llorente) and Barangay Rizal (known as Biyasong later) illustrate this transitional phase[cite: 2]. Their eventual incorporation into neighboring municipalities reflected the practical challenges of postwar governance — particularly the need to meet requirements related to population size, accessibility, and the establishment of basic institutions such as schools[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="heart" class="w-5 h-5 text-amber-500"></i>
+          Ecclesiastical Formation and Community Life (1948-1951)
+        </h3>
+        <p>The postwar years marked not only the political and administrative growth of General MacArthur but also the deepening of its spiritual and communal foundations[cite: 2]. As the municipality began to rebuild and organize itself, parallel efforts emerged to strengthen the religious life of its people — efforts that would play a crucial role in shaping community identity[cite: 2].</p>
+        <p>A defining milestone came on November 30, 1948, with the establishment of the Parish of Saint Joseph[cite: 2]. This event signified more than the creation of a place of worship; it reflected the formal recognition of a growing population in need of a stable and dedicated spiritual center[cite: 2]. The parish quickly became a focal point for community life — hosting not only religious services but also serving as a space for gathering, moral guidance, and the reinforcement of shared values[cite: 2].</p>
+        <p>The formation of the parish marked an important step toward ecclesiastical organization[cite: 2]. It introduced a more consistent structure for pastoral care, allowing for regular administration of sacraments, liturgical celebrations, and sustained religious instruction[cite: 2]. In a period of rapid social and economic change, this stability helped unify the faithful and foster a sense of continuity and belonging[cite: 2].</p>
+        <p>This progress was further solidified in 1951, when the parish achieved full autonomy with the appointment of a resident parish priest, Constancio Latorre (1951-1954)[cite: 2]. With permanent clergy leadership, the parish was able to function independently, respond more effectively to the spiritual needs of the community, and strengthen its institutional presence[cite: 2].</p>
+        <p>During this same period, the construction of the present church gave physical form to this spiritual growth[cite: 2]. Attributed to Jose Acosta, the structure stands not only as a religious center but also as a cultural landmark embodying both faith and local artistry[cite: 2].</p>
+        <p>Together, these developments marked a significant phase in the town's history[cite: 2]. They strengthened religious life through regular worship and pastoral care, reinforced community identity by providing a shared spiritual center, and demonstrated institutional independence in sustaining its own religious structures[cite: 2]. In this way, the consolidation of the parish paralleled the municipality's broader journey toward self-reliance — anchoring its growth not only in governance, but also in faith and communal resilience[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="cross" class="w-5 h-5 text-amber-500"></i>
+          A New Shepherd: Creation of the Diocese of Borongan & Its Impact on Parish Life
+        </h3>
+        <p>The decree <em>Quod Sacri</em>, issued by Pope John XXIII on October 22, 1960, marked a profound moment in the ecclesiastical history of Eastern Samar[cite: 2]. Through this apostolic act, the Diocese of Borongan was established, formally organizing the local Church into a distinct and self-governing ecclesiastical jurisdiction[cite: 2]. This development carried deep significance for parishes within its territory, including the Parish of Saint Joseph, which had been created earlier on November 30, 1948[cite: 2].</p>
+        <p>For the Parish of Saint Joseph, the creation of the Diocese represented a turning point in its spiritual and institutional life[cite: 2]. Prior to this, the parish existed within broader ecclesiastical structures, where pastoral direction and administrative oversight were tied to distant authorities[cite: 2]. With the establishment of the Diocese of Borongan, the parish became part of a more localized and cohesive Church community — one that was closer to the faithful and more responsive to their spiritual needs[cite: 2].</p>
+        <p>This change strengthened the parish in several important ways[cite: 2]. First, it affirmed its place within a formal diocesan structure, linking it more directly to a bishop who could provide consistent guidance, support, and leadership[cite: 2]. Second, it fostered a stronger sense of unity among the faithful, as parishes across the region were now integrated into a shared ecclesiastical identity under the Diocese[cite: 2]. This unity helped nurture collaboration, deepen religious practice, and reinforce a collective sense of belonging among the Catholic community[cite: 2].</p>
+        <p>Moreover, the establishment of the Diocese marked a shift toward greater pastoral accessibility[cite: 2]. With a localized hierarchy, sacraments, liturgical celebrations, and ecclesiastical decisions could be administered more efficiently and in closer alignment with the needs of the people[cite: 2]. For the Parish of Saint Joseph, this meant a more stable and structured environment in which to grow as a center of worship, community life, and moral formation[cite: 2].</p>
+        <p>In a broader sense, the decree <em>Quod Sacri</em> symbolizes the maturation of the Church in Eastern Samar — from scattered mission parishes to an organized diocesan community rooted in local leadership and identity[cite: 2]. For the Parish of Saint Joseph, it represents both recognition and responsibility: recognition of its role within a growing ecclesiastical network, and responsibility to participate actively in the mission of the Church under the guidance of its diocese[cite: 2].</p>
+        <p>Thus, the creation of the Diocese of Borongan stands as a defining moment that strengthened the spiritual foundation of the Parish of Saint Joseph, shaping its development as a living community of faith and anchoring it more firmly within the wider history of the Church in the Philippines[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="map-pin" class="w-5 h-5 text-amber-500"></i>
+          Provincial Realignment and Administrative Identity (1965)
+        </h3>
+        <p>The municipality's administrative evolution continued into the 1960s[cite: 2]. On June 19, 1965, through Republic Act No. 4221, General MacArthur was integrated into the newly created province of Eastern Samar[cite: 2]. This transition marked an important shift in its political and geographic alignment, situating the municipality within a distinct provincial framework[cite: 2].</p>
+        <p>Taken together, the years from 1947 to 1965 represent the birth and consolidation of General MacArthur as a municipality[cite: 2]. From its legal creation and postwar expansion to the establishment of enduring civic and religious institutions, this period reflects a community actively shaping its identity — grounded in resilience, structured governance, and a shared sense of purpose in the aftermath of war[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="compass" class="w-5 h-5 text-amber-500"></i>
+          The Making of a Present-day Municipality
+        </h3>
+        <p>The early postwar years of General MacArthur (1947-1951) can be understood not simply as the birth of a municipality, but as a moment of profound transformation — a turning point where scattered communities began to coalesce into a more defined social and political order[cite: 2]. This period reflects a deeper process: the reorganization of space, the reorientation of livelihoods, and the gradual formalization of governance[cite: 2].</p>
+        <p>At the heart of this transformation was infrastructure, particularly the opening of inland roads[cite: 2]. These roads were more than physical pathways; they were instruments of change that reconfigured how people related to their environment[cite: 2]. Areas that were once remote and difficult to reach became accessible, and this accessibility altered settlement patterns[cite: 2]. Communities expanded beyond the coast and moved inland, creating new modes of activity[cite: 2]. In this sense, infrastructure did not merely support development — it actively shaped where and how development occurred[cite: 2].</p>
+        <p>Yet infrastructure alone does not explain the full picture[cite: 2]. Economic forces worked in tandem with these physical changes[cite: 2]. As roads improved connectivity, trade became more dynamic, and agricultural goods could circulate with greater efficiency[cite: 2]. This economic mobility encouraged population movement, as people sought better opportunities and more sustainable livelihoods[cite: 2]. Settlement, therefore, was not random; it was guided by the interplay between access, opportunity, and survival[cite: 2]. The movement of people was both a response to and a driver of economic change[cite: 2].</p>
+        <p>However, this expansion was not without structure or limitation[cite: 2]. Administrative systems introduced criteria that determined which communities could be formally recognized[cite: 2]. Factors such as population size, accessibility, and the ability to support essential institutions like schools and local governance became measures of legitimacy[cite: 2]. This created a selective process in which some communities were incorporated into the municipality, while others remained outside its official boundaries[cite: 2]. Here, governance acted as a defining force, shaping not only administration but also the very identity of place[cite: 2].</p>
+        <p>From an interpretative standpoint, what emerges is a transition from fluidity to structure[cite: 2]. Early settlement patterns were flexible, adaptive, and often loosely defined[cite: 2]. Over time, however, these patterns gave way to a more organized municipal system — one governed by rules, boundaries, and development-oriented principles[cite: 2]. This shift reflects a broader postwar reality: a move toward order, stability, and institutional coherence after a period of disruption[cite: 2].</p>
+        <p>In essence, the early years of General MacArthur reveal a dynamic convergence of infrastructure, economy, and governance[cite: 2]. Together, these forces transformed a fragmented and evolving landscape into a structured municipality with a clearer sense of identity and direction[cite: 2]. This process did not simply establish a town — it laid the foundation for a community capable of growth, adaptation, and continuity within the broader narrative of Philippine development[cite: 2].</p>
+      </section>
+
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md space-y-3">
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-700/60 pb-2">
+          <i data-lucide="layers" class="w-5 h-5 text-amber-500"></i>
+          A Layered History of Transformation
+        </h3>
+        <p>The story of General MacArthur unfolds as a layered and evolving narrative — one that traces the community's transformation across time while reflecting the broader currents of Philippine history[cite: 2]. From its earliest beginnings as Pamboan, a pre-Hispanic coastal settlement shaped by maritime life and early exchange, the community gradually entered a new phase under colonial influence[cite: 2]. It developed into Pambujan during the Spanish period, when missionary expansion and administrative restructuring introduced new systems of governance, religion, and social organization[cite: 2].</p>
+        <p>Over time, this evolving settlement experienced periods of disruption, abandonment, and renewal — conditions that reflect not only local circumstances but also the wider patterns of Philippine history[cite: 2]. The arrival of missionaries brought new cultural and religious frameworks, while colonial rule reorganized communities into more structured pueblos[cite: 2]. These changes were often accompanied by instability, yet the persistence of the people allowed the community to endure and adapt[cite: 2]. In the postwar era, these historical layers culminated in the emergence of a modern municipality, now known as General MacArthur, defined by structured governance and a clearer political identity[cite: 2].</p>
+        <p>This historical trajectory mirrors the broader national experience: the imposition and spread of colonial systems, the reconfiguration of local life under foreign rule, and ultimately the gradual movement toward independence and self-governance[cite: 2]. The municipality's development, therefore, is not an isolated story, but part of a larger historical continuum that connects local experience to national transformation[cite: 2].</p>
+        <p>However, this rich and complex history is not fully preserved in written records[cite: 2]. Significant gaps remain, particularly in its early periods, where documentation is limited or fragmented[cite: 2]. As a result, much of what is known relies on oral traditions, collective memory, and interpretative reconstruction[cite: 2]. This reality presents both a challenge and an opportunity for historical inquiry[cite: 2].</p>
+        <p>In this sense, the work of the historian remains ongoing[cite: 2]. It requires a careful balance between valuing oral histories while critically examining available documents and sources — and a willingness to revisit and reinterpret the past as new evidence emerges[cite: 2]. Through this process, the history of General MacArthur continues to be recovered, understood, and preserved, ensuring that its layered past remains meaningful for present and future generations[cite: 2]. In other words, the evolving understanding of its past serves as a reminder: history is not static[cite: 2]. It is a continuous process of discovery, guided by evidence, enriched by tradition, and shaped by those who seek the truth[cite: 2].</p>
+        <p>Today, the municipality stands as a home of capable, resilient, and forward-looking people, sometimes affectionately called Macky[cite: 2]. Its heritage — both cultural and historical — remains a source of pride and identity[cite: 2].</p>
+        <p class="font-bold text-amber-500">To GOD be the glory![cite: 2]</p>
+      </section>
+
+      <!-- TABBED BARANGAY HISTORIES SECTION -->
+      <section class="space-y-4 pt-4 border-t-2 border-amber-500/30">
+        <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-wide uppercase flex items-center gap-2">
+          <i data-lucide="map-pins" class="w-6 h-6 text-amber-500"></i>
+          Barangay Histories
+        </h3>
+
+        <!-- BARANGAY TABS NAVIGATION -->
+        <div class="flex items-center space-x-2 overflow-x-auto p-1.5 bg-slate-200/80 dark:bg-slate-800/80 rounded-2xl border border-slate-300/50 dark:border-slate-700/50">
+          <button onclick="switchBarangayTab('brgy-poblacion-overview')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl bg-amber-500 text-slate-950 shadow-md whitespace-nowrap transition-all">Poblacion Overview</button>
+          <button onclick="switchBarangayTab('brgy-1')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Brgy 1</button>
+          <button onclick="switchBarangayTab('brgy-2')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Brgy 2</button>
+          <button onclick="switchBarangayTab('brgy-3')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Brgy 3</button>
+          <button onclick="switchBarangayTab('brgy-4')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Brgy 4</button>
+          <button onclick="switchBarangayTab('brgy-5')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Brgy 5</button>
+          <button onclick="switchBarangayTab('brgy-6')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Brgy 6</button>
+          <button onclick="switchBarangayTab('brgy-7')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Brgy 7</button>
+          <button onclick="switchBarangayTab('brgy-8')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Brgy 8</button>
+          <button onclick="switchBarangayTab('brgy-aguinaldo')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Aguinaldo</button>
+          <button onclick="switchBarangayTab('brgy-binalay')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Binalay</button>
+          <button onclick="switchBarangayTab('brgy-calutan')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Calutan</button>
+          <button onclick="switchBarangayTab('brgy-domrog')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Domrog</button>
+          <button onclick="switchBarangayTab('brgy-limbujan')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">Limbujan</button>
+          <button onclick="switchBarangayTab('brgy-san-isidro')" class="brgy-tab-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 whitespace-nowrap transition-all">San Isidro</button>
+        </div>
+
+        <!-- BARANGAY PANELS -->
+        <div id="brgy-poblacion-overview" class="brgy-content-panel space-y-4">
+          <div class="space-y-3 bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white">The Poblacion Subdivision and Component Barangays</h4>
+            <p>The subdivision of a municipality's población (town center) into separate component barangays in the Philippines was not done at one single nationwide date — it evolved through administrative reforms but it became formalized and standardized during the late 20th century[cite: 2].</p>
+            
+            <h5 class="text-sm font-bold text-amber-500 uppercase tracking-wider mt-3">Key Turning Point</h5>
+            <p>A decisive shift in the structure of local governance in the Philippines came in 1974 with the issuance of Presidential Decree No. 557[cite: 2]. This landmark decree formally replaced the term barrio — a legacy of the Spanish colonial administrative system — with barangay, a word deeply rooted in pre-colonial Filipino society[cite: 2]. More than a mere change in terminology, the decree represented a deliberate effort to reorient governance toward a more localized and culturally grounded framework[cite: 2].</p>
+            <p>By institutionalizing the barangay as the basic political unit, the decree strengthened grassroots governance and clarified administrative boundaries at the community level[cite: 2]. This transformation had far-reaching implications, particularly within municipal centers or poblaciones[cite: 2]. Where once a población might have functioned as a single, undivided barrio, the recognition of barangays as distinct political units opened the way for more systematic subdivision[cite: 2].</p>
+            <p>In effect, Presidential Decree No. 557 laid the groundwork for a more granular and responsive system of local administration[cite: 2]. It enabled growing urban centers and densely populated poblaciones to be divided into smaller, more manageable barangays — each with its own leadership and governance structure[cite: 2]. Through this reform, local government became more accessible to the people, fostering participation, representation, and more efficient delivery of public services at the community level[cite: 2].</p>
+
+            <h5 class="text-sm font-bold text-amber-500 uppercase tracking-wider mt-3">Institutionalization</h5>
+            <p>The process of firmly establishing the barangay as the cornerstone of local governance reached its full institutional maturity in 1991 with the enactment of the Local Government Code of 1991[cite: 2]. This landmark legislation did not merely reaffirm earlier reforms — it provided a comprehensive and enduring legal framework that defined the barangay as the primary administrative and political unit of the Philippine local government system[cite: 2].</p>
+            <p>In this way, national policy provides the framework, but local history supplies the detail, revealing how each municipality adapted to the broader shift toward decentralized and community-based governance[cite: 2].</p>
+          </div>
+
+          <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 sm:p-6 rounded-r-2xl space-y-2">
+            <h4 class="text-base font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wider">REPUBLIC ACT NO. 193</h4>
+            <p class="text-xs sm:text-sm font-semibold uppercase tracking-wide">AN ACT CREATING THE MUNICIPALITY OF GENERAL MACARTHUR IN THE PROVINCE OF SAMAR[cite: 2]</p>
+            <p class="text-xs sm:text-sm"><strong>Section 1.</strong> The barrios of Pambujan Sur, Calutan, San Isidro, Vigan, Binalay, Camcueves, Domrog and Pingan of the municipality of Hernani, Province of Samar, are hereby constituted as a separate and independent municipality to be known as General MacArthur[cite: 2].</p>
+            <p class="text-xs sm:text-sm"><strong>Sec. 2.</strong> The municipal mayor, vice-mayor, and councilors of the newly created municipality shall be appointed by the President of the Philippine Republic to hold office until their successors are duly elected and qualified[cite: 2].</p>
+            <p class="text-xs sm:text-sm"><strong>Sec. 3.</strong> This Act shall take effect upon its approval[cite: 2].</p>
+            <p class="text-xs sm:text-sm italic font-medium">Enacted, without Executive approval, June 22, 1947[cite: 2].</p>
+          </div>
+        </div>
+
+        <div id="brgy-1" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY 1 POBLACION</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Barangay 1 Poblacion is part of the historic and administrative core of the municipality of General MacArthur[cite: 2]. Its origins can be traced to the early settlement known as Pambujan Sur, one of the recognized territorial units at the time of the municipality's creation on June 22, 1947, through Republic Act No. 193[cite: 2].</p>
+          <p>In the years immediately following the establishment of the municipality, Pambujan Sur functioned as a central and expansive settlement that encompassed much of what is now the poblacion or town center[cite: 2]. As the community transitioned from the disruptions of the Second World War into a period of recovery and growth, demographic expansion and increasing socio-economic activities necessitated a more structured and localized system of governance[cite: 2].</p>
+          <p>Consistent with prevailing administrative practices in the Philippines during the post-war era, large barrios were reorganized into smaller barangays to improve governance efficiency, enhance public service delivery, and support the orderly development of emerging urban centers[cite: 2]. Within this context, Pambujan Sur was gradually subdivided into what are now known as Poblacion Barangays 1 to 8, with Barangay 1 emerging as one of these primary administrative units[cite: 2].</p>
+          <p>Although no single national law or widely published record establishes the exact year of this subdivision, it is historically consistent to situate the process within the post-war period, approximately from the late 1940s to the 1960s[cite: 2]. The reorganization was likely carried out through local legislative measures — such as municipal council resolutions or executive actions — reflecting the decentralized nature of barangay formation during that time[cite: 2]. The process may have occurred incrementally, rather than as a one-time formal act[cite: 2].</p>
+          <p>The absence of a definitive date underscores the broader challenge of reconstructing local administrative histories, as many records from this period remain undocumented, unpublished, or preserved only in municipal or provincial archives[cite: 2]. Nonetheless, the evolution of Barangay 1 Poblacion from the larger Pambujan Sur settlement represents a significant milestone in the spatial and institutional development of the municipality[cite: 2].</p>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Development Perspective</h5>
+          <p>Barangay 1 Poblacion today occupies a vital position within the town center of General MacArthur, functioning as part of the municipality's administrative, commercial, and social hub[cite: 2]. Its historical roots as a segment of Pambujan Sur provide important context for understanding current land use patterns, settlement density, and governance structures[cite: 2].</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Recognition of Barangay 1 as part of the original settlement nucleus of the municipality[cite: 2]</li>
+            <li>Strengthening urban governance and infrastructure systems in densely populated core areas[cite: 2]</li>
+            <li>Supporting archival research and historical documentation to clarify administrative timelines[cite: 2]</li>
+            <li>Promoting a cohesive development strategy among the poblacion barangays as a unified urban center[cite: 2]</li>
+          </ul>
+        </div>
+
+        <div id="brgy-2" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY 2 POBLACION</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Pambujan Sur, one of the early settlements recognized during the creation of the Municipality of General MacArthur in 1947, was subsequently subdivided into the present Poblacion Barangays 1 to 8 during the post-war period (late 1940s-1960s) as part of the administrative reorganization of the town center[cite: 2]. The exact year of subdivision requires further archival validation[cite: 2].</p>
+          <p>Barangay 2 Poblacion is one of the integral components of the historic town center of the municipality of General MacArthur[cite: 2]. Its origins are inseparable from the early settlement known as Pambujan Sur, a territorial unit that formed part of the municipality upon its official creation on June 22, 1947, through Republic Act No. 193[cite: 2].</p>
+          <p>Following the establishment of the municipality in the post-war period, Pambujan Sur functioned as a large and central settlement encompassing what is now the poblacion area[cite: 2]. As the community gradually recovered from the effects of World War II and experienced population growth and spatial concentration, the need for a more efficient system of governance and service delivery became increasingly apparent[cite: 2].</p>
+        </div>
+
+        <div id="brgy-3" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY 3 POBLACION</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Barangay 3 Poblacion is one of the constituent communities that comprise the historic town center of the municipality of General MacArthur[cite: 2]. Its historical development is rooted in the early settlement of Pambujan Sur, which served as one of the recognized territorial units upon the creation of the municipality on June 22, 1947, through Republic Act No. 193[cite: 2].</p>
+        </div>
+
+        <div id="brgy-4" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY 4 POBLACION</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Barangay 4 Poblacion is one of the component barangays that form the historic and administrative center of the municipality of General MacArthur[cite: 2]. Its origins are intrinsically linked to the early settlement of Pambujan Sur, which was recognized as one of the territorial units during the formal creation of the municipality on June 22, 1947, through Republic Act No. 193[cite: 2].</p>
+        </div>
+
+        <div id="brgy-5" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY 5 POBLACION</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Barangay 5 Poblacion forms part of the historic core of the municipality of General MacArthur, with origins deeply rooted in the early coastal settlements of Eastern Samar that predate formal colonial administration[cite: 2]. Its historical evolution reflects centuries of settlement transformation shaped by exploration, Christianization, trade, and governance[cite: 2].</p>
+          <p>Early accounts associate the area with the settlement known as Pamboan, which already figured in the broader narrative of early global exploration[cite: 2]. On March 16, 1521, the expedition led by Ferdinand Magellan reportedly attempted a landing along the eastern coast of Samar at approximately 11° North latitude[cite: 2].</p>
+        </div>
+
+        <div id="brgy-6" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY 6 POBLACION</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Barangay 6 Poblacion is one of the constituent barangays that make up the historic and administrative core of the municipality of General MacArthur[cite: 2]. Its historical roots are closely associated with the early settlement of Pambujan Sur, a territorial unit recognized during the establishment of the municipality on June 22, 1947, through Republic Act No. 193[cite: 2].</p>
+        </div>
+
+        <div id="brgy-7" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY 7 POBLACION</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Barangay 7 Poblacion is one of the eight barangays forming the historic and administrative center of the municipality of General MacArthur[cite: 2]. Its origin traces back to the early settlement of Pambujan Sur, recognized as a key territorial unit during the creation of the municipality on June 22, 1947, under Republic Act No. 193[cite: 2].</p>
+        </div>
+
+        <div id="brgy-8" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY 8 POBLACION</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Barangay 8 Poblacion is one of the eight barangays that constitute the town center of the municipality of General MacArthur[cite: 2]. Its origin is deeply rooted in the early settlement of Pambujan Sur, recognized as one of the initial territorial units when the municipality was officially created on June 22, 1947, through Republic Act No. 193[cite: 2].</p>
+        </div>
+
+        <div id="brgy-aguinaldo" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY AGUINALDO</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Barangay Aguinaldo, historically known as Macabasa or Malingon, traces its origins to the settlement activities of 1958, with formal recognition as a barangay in 1962[cite: 2].</p>
+        </div>
+
+        <div id="brgy-binalay" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY BINALAY</h4>
+          <p>Barangay Binalay, formerly known as Sun-og prior to 1946, is one of the oldest settlements that contributed to the formation of the municipality of General MacArthur[cite: 2].</p>
+        </div>
+
+        <div id="brgy-calutan" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY CALUTAN</h4>
+          <p>Barangay Calutan traces its origins to 1912, when it was first established as a small rural settlement known as Calot[cite: 2].</p>
+        </div>
+
+        <div id="brgy-domrog" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY DOMROG</h4>
+          <p>Barangay Domrog traces its beginnings to 1936, when it was first established as a small settlement and initially functioned as a sitio of Barangay Calutan[cite: 2].</p>
+        </div>
+
+        <div id="brgy-limbujan" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY LIMBUJAN</h4>
+          <p>Barangay Limbujan traces its origins to 1945, in the immediate aftermath of World War II — a period marked by rebuilding and renewed aspirations among rural communities[cite: 2].</p>
+        </div>
+
+        <div id="brgy-san-isidro" class="brgy-content-panel hidden bg-white/70 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
+          <h4 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700/60 pb-1">BARANGAY SAN ISIDRO</h4>
+          <h5 class="text-sm font-bold text-amber-500 uppercase">Historical Background</h5>
+          <p>Barangay San Isidro traces its origins to 1912, when the earliest settlement in the area was established under the name Iraya[cite: 2].</p>
+        </div>
+      </section>
+
+      <!-- SOURCE CITATION FOOTNOTE -->
+      <section class="bg-white/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl backdrop-blur-md shadow-md text-xs text-slate-500 dark:text-slate-400 space-y-2">
+        <h5 class="font-bold uppercase tracking-wider text-amber-500">Documentary Source & Footnotes</h5>
+        <p>¹ This is an abridged historical account of the THDCA Published Historical Narrative indicator documented in the book, <em>An Essay on PAMBOAN: A Pre-Historic Name of General MacArthur</em> presented to the Regional Assessment Team for the SGLG Regional Assessment on May 31, 2024; SGLG National Validation (on September 17, 2024); SGLG Provincial Coordination Meeting on March 20, 2025; SGLG Champions Challenge (on September 2025), and for the NEO+ Executive Briefings on June 25, 2025 at the SB Session Hall rated with a perfect score in all of the indicators in the Governance Area[cite: 2].</p>
+        <p><strong>Primary Citation:</strong> Macky-Alam_2.docx — <em>Abridged Historical Account of General MacArthur: From Pre-Hispanic Pamboan to Present-day Township</em>[cite: 2].</p>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-lg hidden items-center justify-center z-50 p-4 transition-all" onclick="closeLightbox()">
+    <div class="relative max-w-5xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white/80 hover:text-white p-2 rounded-xl hover:bg-white/10 transition">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <img id="lightbox-img" src="" referrerpolicy="no-referrer" class="max-h-[80vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl border border-white/10">
+      <p id="lightbox-caption" class="text-sm font-semibold text-white/90 mt-4 text-center"></p>
+    </div>
+  </div>
+
+  <footer class="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800/80 py-8 mt-auto z-10 transition-colors duration-300">
+    <div class="w-full max-w-[95%] xl:max-w-7xl mx-auto px-4 text-center space-y-2">
+      <p class="text-sm text-slate-600 dark:text-slate-400">&copy; 2026 Local Government Unit of General MacArthur, Eastern Samar.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      }
+    }
+
+    function switchBarangayTab(panelId) {
+      document.querySelectorAll('.brgy-content-panel').forEach(panel => {
+        panel.classList.add('hidden');
+      });
+      document.getElementById(panelId).classList.remove('hidden');
+
+      document.querySelectorAll('.brgy-tab-btn').forEach(btn => {
+        btn.classList.remove('bg-amber-500', 'text-slate-950', 'shadow-md');
+        btn.classList.add('text-slate-700', 'dark:text-slate-300');
+      });
+
+      const activeBtn = event.currentTarget;
+      activeBtn.classList.remove('text-slate-700', 'dark:text-slate-300');
+      activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'shadow-md');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function openLightbox(imgUrl, caption) {
+      document.getElementById('lightbox-img').src = imgUrl;
+      document.getElementById('lightbox-caption').innerText = caption;
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+      document.getElementById('lightbox-modal').classList.add('flex');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').classList.add('hidden');
+      document.getElementById('lightbox-modal').classList.remove('flex');
+    }
+  </script>
+</body>
+</html>
