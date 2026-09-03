@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>General MacArthur, Eastern Samar - Heritage Information System</title>
-  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { darkMode: 'class' }
@@ -558,6 +558,44 @@
       document.getElementById('heritage-form').reset();
       document.getElementById('item-id').value = '';
     }
+  </script>
+
+  <script>
+    // 2. Initialize Supabase
+    const SUPABASE_URL = 'https://papadbdgoktpwyasklhj.supabase.co/rest/v1/';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhcGFkYmRnb2t0cHd5YXNrbGhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzOTgwOTksImV4cCI6MjEwMzk3NDA5OX0.CQoNihIsfAUguGPHz2KolLKFJ0XMwVznAkLMDx8P2Kg';
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // 3. Fetch data asynchronously
+    async function fetchData() {
+      const { data, error } = await _supabase
+        .from('heritage_records')
+        .select('*');
+
+      const container = document.getElementById('data-container');
+
+      if (error) {
+        container.innerText = 'Error loading data: ' + error.message;
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        container.innerText = 'No records found.';
+        return;
+      }
+
+      // Render items to HTML
+      container.innerHTML = data.map(item => `
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+          <h3>${item.title}</h3>
+          <p><strong>Location:</strong> ${item.location}</p>
+          <p>${item.description}</p>
+        </div>
+      `).join('');
+    }
+
+    // Call fetch on page load
+    fetchData();
   </script>
 </body>
 </html>
