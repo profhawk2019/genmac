@@ -152,6 +152,32 @@
 
   </main>
 
+  <!-- READ MORE DETAILS MODAL -->
+  <div id="read-more-modal" class="fixed inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-md hidden items-center justify-center z-50 p-4 transition-all" onclick="closeReadMoreModal()">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[85vh] overflow-y-auto transition-colors duration-300" onclick="event.stopPropagation()">
+      <button onclick="closeReadMoreModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 dark:hover:text-white p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-4">
+        <div class="flex items-center gap-2">
+          <span id="modal-read-category" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"></span>
+          <span id="modal-read-location" class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1"></span>
+        </div>
+
+        <h3 id="modal-read-title" class="text-2xl font-bold text-slate-900 dark:text-white"></h3>
+
+        <div class="border-t border-slate-200 dark:border-slate-800 pt-4">
+          <p id="modal-read-description" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line"></p>
+        </div>
+
+        <div class="pt-4 flex justify-end">
+          <button onclick="closeReadMoreModal()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl text-sm font-bold shadow-lg shadow-amber-500/20 transition">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ADMIN LOGIN MODAL -->
   <div id="login-modal" class="fixed inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-md hidden items-center justify-center z-50 p-4 transition-all">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative transition-colors duration-300">
@@ -377,6 +403,24 @@
       document.getElementById('lightbox-modal').classList.remove('flex');
     }
 
+    function openReadMoreModal(itemId) {
+      const item = fetchedRecords.find(r => r.id === itemId);
+      if (!item) return;
+
+      document.getElementById('modal-read-title').innerText = item.title;
+      document.getElementById('modal-read-category').innerText = item.category;
+      document.getElementById('modal-read-location').innerText = item.location;
+      document.getElementById('modal-read-description').innerText = item.description;
+
+      document.getElementById('read-more-modal').classList.remove('hidden');
+      document.getElementById('read-more-modal').classList.add('flex');
+    }
+
+    function closeReadMoreModal() {
+      document.getElementById('read-more-modal').classList.add('hidden');
+      document.getElementById('read-more-modal').classList.remove('flex');
+    }
+
     function changeCardImage(itemId, direction) {
       const item = fetchedRecords.find(r => r.id === itemId);
       if (!item || !item.images || item.images.length === 0) return;
@@ -476,6 +520,9 @@
         const currentImg = images[activeIdx] || images[0];
         const hasMultiple = images.length > 1;
 
+        const isLongDesc = item.description && item.description.length > 120;
+        const truncatedDesc = isLongDesc ? item.description.substring(0, 120) + '...' : item.description;
+
         return `
           <div class="group bg-white/80 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden backdrop-blur-md shadow-md hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between">
             <div>
@@ -501,7 +548,10 @@
                   <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-amber-600 dark:text-amber-400 border border-slate-200 dark:border-slate-700">${item.category}</span>
                 </div>
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white leading-snug">${item.title}</h3>
-                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">${item.description}</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  ${truncatedDesc}
+                  ${isLongDesc ? `<button onclick="openReadMoreModal('${item.id}')" class="text-amber-600 dark:text-amber-400 font-bold hover:underline ml-1 inline-flex items-center">Read More...</button>` : ''}
+                </p>
               </div>
             </div>
           </div>
