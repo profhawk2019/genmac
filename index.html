@@ -29,7 +29,7 @@
     .animate-blob { animation: blob 10s infinite ease-in-out; }
     .animation-delay-2000 { animation-delay: 2s; }
 
-    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar { width: 8px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #059669; border-radius: 9999px; }
     ::-webkit-scrollbar-thumb:hover { background: #047857; }
@@ -66,10 +66,10 @@
             <i data-lucide="compass" class="w-4 h-4"></i>
             <span class="hidden sm:inline">Public View</span>
           </button>
-          <button onclick="openHistoryModal()" class="px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 flex items-center space-x-1.5">
+          <a href="history.html" class="px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-300/50 dark:hover:bg-slate-700/50 flex items-center space-x-1.5">
             <i data-lucide="book-open" class="w-4 h-4 text-amber-500"></i>
             <span class="hidden md:inline">Historical Account</span>
-          </button>
+          </a>
           <button id="nav-admin" onclick="switchTab('admin-view')" class="px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1.5">
             <i data-lucide="shield-check" class="w-4 h-4"></i>
             <span class="hidden sm:inline">Admin Portal</span>
@@ -151,65 +151,6 @@
     </section>
 
   </main>
-
-  <!-- HISTORICAL BACKGROUND MODAL -->
-  <div id="history-modal" class="fixed inset-0 bg-slate-950/80 dark:bg-slate-950/90 backdrop-blur-md hidden items-center justify-center z-50 p-2 sm:p-6 transition-all" onclick="closeHistoryModal()">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-5xl w-full p-6 sm:p-10 shadow-2xl relative max-h-[92vh] flex flex-col my-auto" onclick="event.stopPropagation()">
-      
-      <button onclick="closeHistoryModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 dark:hover:text-white p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition z-20">
-        <i data-lucide="x" class="w-6 h-6"></i>
-      </button>
-
-      <div class="flex items-center space-x-4 mb-4 pb-4 border-b border-slate-200 dark:border-slate-800 flex-shrink-0">
-        <img src="IMG_Logo.png" alt="Official Seal" class="w-16 h-16 rounded-full object-contain border-2 border-amber-400 shadow-md" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=100&q=80';">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-amber-500">Official Comprehensive Narrative</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Abridged Historical Account of General MacArthur</h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">From Pre-Hispanic Pamboan to Present-day Township (Eastern Samar)</p>
-        </div>
-      </div>
-
-      <div class="overflow-y-auto pr-2 sm:pr-4 space-y-8 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-        <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-xl">
-          <p class="text-xs sm:text-sm text-amber-900 dark:text-amber-200 font-medium italic">
-            "No documents, no history." — Charles Seignobos. This comprehensive narrative bridges oral tradition with verifiable archival records to document the complete historical trajectory of the Municipality of General MacArthur, Eastern Samar.
-          </p>
-        </div>
-
-        <div class="my-6">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-500 mb-3 flex items-center gap-1.5">
-            <i data-lucide="image" class="w-4 h-4"></i> Archival Photographs (Early Civic Buildings & Schools)
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165507.jpg', 'Gabaldon School & Early Civic Building Assembly')">
-              <img src="IMG_20260817_165507.jpg" alt="Historical Building Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80';">
-              <span class="text-[11px] text-slate-400 mt-2 block font-medium">Early Municipal & Civic Gathering</span>
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165453.jpg', 'GMCES School Grounds & Civic Celebration')">
-              <img src="IMG_20260817_165453.jpg" alt="School Grounds Assembly" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80';">
-              <span class="text-[11px] text-slate-400 mt-2 block font-medium">Civic Grounds & Community Life</span>
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/60 bg-slate-950/40 p-2 text-center group cursor-pointer" onclick="openLightbox('IMG_20260817_165435.jpg', 'Historical Town Gathering at Gabaldon Structure')">
-              <img src="IMG_20260817_165435.jpg" alt="Gabaldon Building Historical Photo" class="w-full h-36 object-cover rounded-xl group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80';">
-              <span class="text-[11px] text-slate-400 mt-2 block font-medium">Gabaldon Educational Assembly</span>
-            </div>
-          </div>
-        </div>
-
-        <section class="space-y-3">
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
-            <i data-lucide="book-open-check" class="w-5 h-5 text-amber-500"></i>
-            Reframing the Past: Between Oral Tradition and Documented History
-          </h3>
-          <p>For the longest time, the history of the Municipality of General MacArthur has been shaped by oral tradition stories passed down through generations, rich in meaning yet often unverified. Today, however, through careful research and the examination of documentary evidence, the historical past of Pamboan — the earliest known name of the settlement — has been brought to light with greater clarity.</p>
-        </section>
-      </div>
-
-      <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end flex-shrink-0">
-        <button onclick="closeHistoryModal()" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-md transition">Close Account</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ADMIN LOGIN MODAL -->
   <div id="login-modal" class="fixed inset-0 bg-slate-950/70 dark:bg-slate-950/80 backdrop-blur-md hidden items-center justify-center z-50 p-4 transition-all">
@@ -324,16 +265,6 @@
       }
     }
 
-    function openHistoryModal() {
-      document.getElementById('history-modal').classList.remove('hidden');
-      document.getElementById('history-modal').classList.add('flex');
-    }
-
-    function closeHistoryModal() {
-      document.getElementById('history-modal').classList.add('hidden');
-      document.getElementById('history-modal').classList.remove('flex');
-    }
-
     function convertGoogleDriveUrl(url) {
       if (!url) return url;
       if (url.includes('drive.google.com') || url.includes('docs.google.com')) {
@@ -346,11 +277,6 @@
       }
       return url;
     }
-
-    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-    
-    let _supabase = null;
 
     let isAdminAuthenticated = false;
     const cardCarouselIndices = {};
@@ -454,21 +380,6 @@
         }
       });
       fetchPublicItems();
-    }
-
-    function changeCardImage(itemId, newIndex, event) {
-      if (event) event.stopPropagation();
-      const item = heritageData.find(i => i.id.toString() === itemId.toString());
-      if (!item) return;
-
-      const total = item.images.length;
-      let targetIndex = (newIndex + total) % total;
-      cardCarouselIndices[itemId] = targetIndex;
-
-      const mainImg = document.getElementById(`card-img-${itemId}`);
-      const counter = document.getElementById(`card-counter-${itemId}`);
-      if (mainImg) mainImg.src = item.images[targetIndex];
-      if (counter) counter.innerText = `${targetIndex + 1}/${total}`;
     }
 
     function openLightbox(imgUrl, caption) {
